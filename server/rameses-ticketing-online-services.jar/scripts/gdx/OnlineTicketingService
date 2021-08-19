@@ -1,0 +1,29 @@
+import com.rameses.annotations.*;
+import com.rameses.services.extended.*;
+
+class OnlineTicketingService {
+	@Service('DateService')
+	def dtSvc;
+
+	//TODO: to be replaced by rules
+	@DataContext('itemaccount')
+	def em_itemaccount
+
+	@ProxyMethod
+	public def getBilling(params) {
+		def bill = [:];
+		bill.billno = 'B00121';
+		bill.billdate = dtSvc.serverDate;
+		bill.amount = 150.0;
+
+		def terminalfeeacct = em_itemaccount.find([objid: 'TERMINAL_FEE']).first();
+		def environmentalfeeacct = em_itemaccount.find([objid: 'ENVIRONMENTAL_FEE']).first();
+
+		bill.items = [
+			[item: terminalfeeacct, amount: 100.0],
+			[item: environmentalfeeacct, amount: 50.0],
+		]
+
+		return bill;
+	}
+}

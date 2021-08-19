@@ -1,0 +1,24 @@
+import com.rameses.annotations.*;
+import com.rameses.util.*;
+import treasury.utils.*;
+import ticketing.facts.*;
+
+class TicketingCashReceiptService {
+	
+	@Service("TicketingBillingService")
+	def billingSvc;
+
+	@DataContext("ticketing_itemaccount")
+	def itemAcctEm;
+
+	@ProxyMethod
+	public def getBilling( def o ) {
+		def  p = o.params.info;
+		def res = billingSvc.getBilling( p );
+		res.billitems = res.items;
+		return res;
+	}
+
+
+
+}

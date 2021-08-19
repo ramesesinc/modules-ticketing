@@ -1,0 +1,6 @@
+<workunit extends="com/rameses/admin/plugin/templates/UserRoleList.xml">
+    <invokers>
+        <invoker type="sys_user_role_list:ticketing" caption="Ticketing User Role" 
+                 action="init" index="10" />
+    </invokers>
+</workunit>

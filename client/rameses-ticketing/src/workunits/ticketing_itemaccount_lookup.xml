@@ -1,0 +1,15 @@
+<workunit extends="com/rameses/seti2/templates/CrudLookup.xml" schemaName="ticketing_itemaccount">
+    <invokers>
+        <invoker type="ticketing_itemaccount:lookup" caption="Ticketing Item Account Lookup" 
+                 action="init" index="15"
+                cols="objid,title,item.title"/>
+        <invoker type="ticketing_itemaccount:surcharge:lookup" caption="Ticketing Item Surcharge Lookup" 
+                 action="init" index="15"
+                 customFilter=" itemtype='SURCHARGE' "
+                cols="objid,title,item.title"/>
+        <invoker type="ticketing_itemaccount:interest:lookup" caption="Ticketing Item Interest Lookup" 
+                 action="init" index="15"
+                 customFilter=" itemtype='INTEREST' "
+                cols="objid,title,item.title"/>        
+    </invokers>
+</workunit>

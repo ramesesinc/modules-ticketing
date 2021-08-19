@@ -1,0 +1,39 @@
+eor => [
+    "objid":"000000FVF756MQ5TA4", "paidbyaddress":"CEBU", "origin":"filipizen", 
+    "state":"ACTIVE", "controlno":"000000000001500", "expirydate":2021-08-18, 
+    
+    "info":[
+        "data":[
+            "routes":[["selected":true, "title":"Caticlan - Cagban", "objid":"R1", "origin":"Caticlan", "traveldate":"2021-08-21", "destination":"Cagban"]], 
+            "guestInfo":["total":0, "numadult":"2", "numfil":"2"]
+        ]
+    ], 
+    "mobileno":null, 
+    "amount":150.00, 
+    "refno":"B00121", 
+    "locationid":"000", 
+    "paidby":"JUAN", 
+    "items":[
+        ["amount":100, "item":["hidefromlookup":0, "generic":0, "objid":"TERMINAL_FEE", "parentaccount":["title":null, "objid":null, "code":null], "state":"ACTIVE", "parentid":null, "code":"-", "type":"REVENUE", "org":["objid":null, "name":null, "code":null], "valuetype":"ANY", "title":"TERMINAL FEE", "description":"", "fund":["title":"GENERAL-PROPER", "objid":"GENERAL", "code":"01"], "defaultvalue":0]], ["amount":50, "item":["hidefromlookup":0, "generic":0, "objid":"ENVIRONMENTAL_FEE", "parentaccount":["title":null, "objid":null, "code":null], "state":"ACTIVE", "parentid":null, "code":"-", "type":"REVENUE", "org":["objid":null, "name":null, "code":null], "valuetype":"ANY", "title":"ENVIRONMENTAL FEE", "description":"", "fund":["title":"GENERAL-PROPER", "objid":"GENERAL", "code":"01"], "defaultvalue":0]]
+    ], 
+    "email":"jzamss@gmail.com", 
+    "txntype":"boracayticket", 
+    "particulars":"Terminal Fee for Caticlan - Cagban August 21, 2021. With 2 Guest(s)", 
+    "refid":null, "txndate":2021-08-17 21:09:09.0, 
+    "txntypename":"BORACAY TERMINAL TICKET", 
+    "payer":["name":null, "objid":null], 
+    "partnerid":"PAYMAYA", "tracedate":Tue Aug 17 00:00:00 PHT 2021, 
+    "traceid":"2337b68e-33ec-47c1-b061-c19cf7c1c00a"
+]
+
+ bill => [
+    "amount":150.00, 
+    "data":[
+        "routes":[
+             ["selected":true, "title":"Caticlan - Cagban", "objid":"R1", "origin":"Caticlan", "traveldate":"2021-08-21", "destination":"Cagban"]
+            ], 
+        "guestInfo":[
+            "total":0, "numadult":"2", "numfil":"2"
+        ]
+    ]
+]

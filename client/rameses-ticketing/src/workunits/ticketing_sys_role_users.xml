@@ -1,0 +1,8 @@
+<workunit extends="com/rameses/admin/plugin/templates/RoleUsersList.xml">
+    <invokers>
+        <invoker folderid="/explorer/master/ticketing" caption="Ticketing Role Users" 
+                 role="ADMIN"
+                 action="init" index="200" />
+    </invokers>
+    
+</workunit>

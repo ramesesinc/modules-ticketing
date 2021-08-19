@@ -1,0 +1,19 @@
+<workunit extends="com/rameses/treasury/common/templates/CommonCashReceipt.xml"> 
+    <invokers>
+        <invoker type="collectiontype:handler" caption="Ticketing Collection" 
+                 name="ticketing" formtype="serial" formno="51"  index="110" />
+        
+        <!-- collection type --> 
+        <invoker type="cashreceipt:ticketing" action="start" caption="Ticketing Collection"/>
+        <invoker type="cashreceipt:barcode:510XX" action="loadBarcode" caption="Ticketing Collection"/>
+        
+        <invoker type="appActions" action="doClose" caption="Close"/>        
+        <invoker type="appActions" action="doBack" caption="Back" visibleWhen="#{ mode == 'entry' }"/>        
+        <invoker type="appActions" action="doNext" caption="Next" visibleWhen="#{ mode == 'initial' }"/>
+    </invokers>
+    <code class="com.rameses.etracs.ticketing.models.TicketingCashReceiptModel"/>
+    <pages>
+        <page name="initial" template="com.rameses.etracs.ticketing.views.TicketingCashReceiptPage" />
+        <page name="entry" template="com.rameses.treasury.common.views.SimpleCashReceiptPage"/>
+    </pages> 
+</workunit>
