@@ -9,13 +9,18 @@ class TicketInfo {
 	int numfil;
 	int numnonfil;
 
+	String tag; 
+	String routeid; 
+
 	public TicketInfo( def m ) {
-		if(m.numadult!=null) this.numadult = m.numadult;
-		if(m.numchildren!=null) this.numchildren = m.numchildren;
-		if(m.numsenior!=null) this.numsenior = m.numsenior;
+		this.numadult = (m.numadult ? m.numadult : 0); 
+		this.numchildren = (m.numchildren ? m.numchildren : 0); 
+		this.numsenior = (m.numsenior ? m.numsenior : 0); 
 
-		if(m.numfil!=null) this.numfil = m.numfil;
-		if(m.numnonfil!=null) this.numnonfil = m.numnonfil;
+		this.numfil = (m.numfil ? m.numfil : 0); 
+		this.numnonfil = (m.numnonfil ? m.numnonfil : 0); 
 
+		this.tag = m.tag; 
+		this.routeid = m.routeid;
 	}
 }

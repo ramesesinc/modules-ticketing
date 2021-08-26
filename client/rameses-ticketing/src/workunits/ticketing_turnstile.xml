@@ -1,0 +1,34 @@
+<workunit schemaName="ticketing_turnstile" allowViewReport="false">
+    <invokers>
+        <invoker type="ticketing_turnstile:create" 
+                 caption="Tunstile Information" action="create" 
+                 role="ADMIN" 
+                 target="popup" />
+         
+        <invoker type="ticketing_turnstile:open" 
+                 caption="Tunstile Information" action="open" 
+                 role="ADMIN" 
+                 target="popup" />
+         
+        <invoker type="formActions" 
+                 caption="Action" action="showMenu" context="actions"  
+                 role="ADMIN" 
+                 visibleWhen="#{mode.toString().matches('create|edit') == false}" />
+
+        
+        <!-- Action menus -->                  
+        <invoker type="ticketing_turnstile:form:actions" 
+                 caption="Activate" action="activate" target="process"
+                 visibleWhen="#{ entity?.state != 'ACTIVE' }" />        
+
+        <invoker type="ticketing_turnstile:form:actions" 
+                 caption="Deactivate" action="deactivate" target="process"
+                 visibleWhen="#{ entity?.state == 'ACTIVE' }" />        
+    </invokers>
+   
+    <code class="com.rameses.etracs.ticketing.models.TurnstileModel"/>
+   
+    <pages>
+        <page template="com.rameses.etracs.ticketing.views.TurnstilePage" />
+    </pages>
+</workunit>

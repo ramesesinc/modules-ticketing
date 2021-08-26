@@ -31,87 +31,96 @@ public class TicketingCashReceiptPage extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel5 = new javax.swing.JPanel();
         pnlInitial = new com.rameses.rcp.control.XPanel();
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
-        xLabel1 = new com.rameses.rcp.control.XLabel();
         xLabel5 = new com.rameses.rcp.control.XLabel();
+        xLabel6 = new com.rameses.rcp.control.XLabel();
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
         xIntegerField2 = new com.rameses.rcp.control.XIntegerField();
         xIntegerField3 = new com.rameses.rcp.control.XIntegerField();
         xIntegerField4 = new com.rameses.rcp.control.XIntegerField();
         xIntegerField5 = new com.rameses.rcp.control.XIntegerField();
 
+        setMinimumSize(new java.awt.Dimension(586, 313));
+        setPreferredSize(new java.awt.Dimension(586, 313));
         setLayout(new java.awt.BorderLayout());
 
-        jPanel5.setLayout(new java.awt.BorderLayout());
+        pnlInitial.setLayout(new java.awt.BorderLayout());
 
-        xFormPanel2.setCaptionWidth(150);
-
-        xLabel1.setCaption("Select a transaction");
-        xLabel1.setPreferredSize(new java.awt.Dimension(0, 18));
-        xLabel1.setShowCaption(false);
-        xLabel1.setText("Enter Info");
-        xFormPanel2.add(xLabel1);
+        xFormPanel2.setCaptionFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        xFormPanel2.setCaptionVAlignment(com.rameses.rcp.constant.UIConstants.CENTER);
+        xFormPanel2.setCaptionWidth(200);
+        xFormPanel2.setCellspacing(4);
 
         xLabel5.setCaption("Route");
-        xLabel5.setExpression("#{ entity.route }");
+        xLabel5.setExpression("#{ entity.route.name }");
         xLabel5.setName(""); // NOI18N
         xLabel5.setVisibleWhen("");
         xLabel5.setCellPadding(new java.awt.Insets(30, 30, 0, 0));
-        xLabel5.setPreferredSize(new java.awt.Dimension(0, 20));
+        xLabel5.setFontStyle("font-size:16; font-weight: bold;");
+        xLabel5.setForeground(new java.awt.Color(50, 50, 50));
+        xLabel5.setPreferredSize(new java.awt.Dimension(0, 30));
+        xLabel5.setShowCaption(false);
         xFormPanel2.add(xLabel5);
+
+        xLabel6.setCaption("Route");
+        xLabel6.setExpression("Guest Information");
+        xLabel6.setName(""); // NOI18N
+        xLabel6.setVisibleWhen("");
+        xLabel6.setCellPadding(new java.awt.Insets(15, 30, 5, 0));
+        xLabel6.setFontStyle("font-size:14; font-weight: bold;");
+        xLabel6.setForeground(new java.awt.Color(50, 50, 50));
+        xLabel6.setPreferredSize(new java.awt.Dimension(0, 24));
+        xLabel6.setShowCaption(false);
+        xFormPanel2.add(xLabel6);
 
         xIntegerField1.setCaption("No. of Adults");
         xIntegerField1.setName("numadult"); // NOI18N
-        xIntegerField1.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
+        xIntegerField1.setCellPadding(new java.awt.Insets(0, 45, 0, 0));
+        xIntegerField1.setFontStyle("font-size:14");
+        xIntegerField1.setPreferredSize(new java.awt.Dimension(100, 24));
+        xIntegerField1.setRequired(true);
         xFormPanel2.add(xIntegerField1);
 
         xIntegerField2.setCaption("No. of Senior");
         xIntegerField2.setName("numsenior"); // NOI18N
-        xIntegerField2.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
+        xIntegerField2.setCellPadding(new java.awt.Insets(0, 45, 0, 0));
+        xIntegerField2.setFontStyle("font-size:14");
+        xIntegerField2.setPreferredSize(new java.awt.Dimension(100, 24));
+        xIntegerField2.setRequired(true);
         xFormPanel2.add(xIntegerField2);
 
         xIntegerField3.setCaption("No. of Children");
         xIntegerField3.setName("numchildren"); // NOI18N
-        xIntegerField3.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
+        xIntegerField3.setCellPadding(new java.awt.Insets(0, 45, 0, 0));
+        xIntegerField3.setFontStyle("font-size:14");
+        xIntegerField3.setPreferredSize(new java.awt.Dimension(100, 24));
+        xIntegerField3.setRequired(true);
         xFormPanel2.add(xIntegerField3);
 
         xIntegerField4.setCaption("No. of Filipinos");
         xIntegerField4.setName("numfil"); // NOI18N
-        xIntegerField4.setCellPadding(new java.awt.Insets(30, 30, 0, 0));
+        xIntegerField4.setCellPadding(new java.awt.Insets(25, 45, 0, 0));
+        xIntegerField4.setFontStyle("font-size:14");
+        xIntegerField4.setPreferredSize(new java.awt.Dimension(100, 24));
+        xIntegerField4.setRequired(true);
         xFormPanel2.add(xIntegerField4);
 
-        xIntegerField5.setCaption("No. of Non-filipinos");
+        xIntegerField5.setCaption("No. of Non-Filipinos");
         xIntegerField5.setName("numnonfil"); // NOI18N
-        xIntegerField5.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
+        xIntegerField5.setCellPadding(new java.awt.Insets(0, 45, 0, 0));
+        xIntegerField5.setFontStyle("font-size:14");
+        xIntegerField5.setPreferredSize(new java.awt.Dimension(100, 24));
+        xIntegerField5.setRequired(true);
         xFormPanel2.add(xIntegerField5);
 
-        javax.swing.GroupLayout pnlInitialLayout = new javax.swing.GroupLayout(pnlInitial);
-        pnlInitial.setLayout(pnlInitialLayout);
-        pnlInitialLayout.setHorizontalGroup(
-            pnlInitialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlInitialLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(228, Short.MAX_VALUE))
-        );
-        pnlInitialLayout.setVerticalGroup(
-            pnlInitialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlInitialLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
-        );
+        pnlInitial.add(xFormPanel2, java.awt.BorderLayout.CENTER);
 
-        jPanel5.add(pnlInitial, java.awt.BorderLayout.CENTER);
-
-        add(jPanel5, java.awt.BorderLayout.CENTER);
+        add(pnlInitial, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel5;
     private com.rameses.rcp.control.XPanel pnlInitial;
     private com.rameses.rcp.control.XFormPanel xFormPanel2;
     private com.rameses.rcp.control.XIntegerField xIntegerField1;
@@ -119,7 +128,7 @@ public class TicketingCashReceiptPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XIntegerField xIntegerField3;
     private com.rameses.rcp.control.XIntegerField xIntegerField4;
     private com.rameses.rcp.control.XIntegerField xIntegerField5;
-    private com.rameses.rcp.control.XLabel xLabel1;
     private com.rameses.rcp.control.XLabel xLabel5;
+    private com.rameses.rcp.control.XLabel xLabel6;
     // End of variables declaration//GEN-END:variables
 }

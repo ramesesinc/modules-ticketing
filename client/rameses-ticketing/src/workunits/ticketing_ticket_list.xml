@@ -1,0 +1,14 @@
+<workunit extends="com/rameses/seti2/templates/CrudNodeList.xml" 
+          schemaName="vw_ticketing_ticket" 
+          allowCreate="false" allowOpen="false" allowDelete="false">
+
+    <invokers>
+        <invoker folderid="menucategory/ticketing/mgmt" 
+                 caption="View Terminal Tickets" action="init" 
+                 role="MASTER,SHARED,COLLECTOR" 
+                 cols="objid,seqno,barcode,dtfiled,tag,reftype,refno,dtused,voided" 
+                 hiddenCols="void.objid" />
+    </invokers>
+    
+    <code class="com.rameses.etracs.ticketing.models.TicketListModel" /> 
+</workunit>

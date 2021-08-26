@@ -17,7 +17,10 @@
     </folder>
      <folder id="menucategory">
         <folder id="ticketing" caption="Ticketing">
-            <folder id="txn" caption="Transactions" index="0" icon="home/icons/folder.png"/>
+            <folder id="txn" caption="Transactions" index="0" icon="home/icons/postledger.png"/>
+            <folder id="mgmt" caption="Management" index="5" icon="home/icons/postledger.png"/>
+            <folder id="tool" caption="Tools" index="9" icon="home/icons/postledger.png"/>
+            <folder id="setting" caption="Settings" index="10" icon="home/icons/postledger.png"/>
         </folder>
     </folder>
 </folders> 

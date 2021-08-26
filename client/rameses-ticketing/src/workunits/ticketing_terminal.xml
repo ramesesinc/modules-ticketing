@@ -1,0 +1,34 @@
+<workunit schemaName="ticketing_terminal" allowViewReport="false">
+    <invokers>
+        <invoker type="ticketing_terminal:create" 
+                 caption="Terminal Information" action="create" 
+                 role="ADMIN" 
+                 target="popup" />
+         
+        <invoker type="ticketing_terminal:open" 
+                 caption="Terminal Information" action="open" 
+                 role="ADMIN" 
+                 target="popup" />
+         
+        <invoker type="formActions" 
+                 caption="Action" action="showMenu" context="actions"  
+                 role="ADMIN" 
+                 visibleWhen="#{mode.toString().matches('create|edit') == false}" />
+
+        
+        <!-- Action menus -->                  
+        <invoker type="ticketing_terminal:form:actions" 
+                 caption="Activate" action="activate" target="process"
+                 visibleWhen="#{ entity?.state != 'ACTIVE' }" />        
+
+        <invoker type="ticketing_terminal:form:actions" 
+                 caption="Deactivate" action="deactivate" target="process"
+                 visibleWhen="#{ entity?.state == 'ACTIVE' }" />        
+    </invokers>
+   
+    <code class="com.rameses.etracs.ticketing.models.TerminalModel"/>
+   
+    <pages>
+        <page template="com.rameses.etracs.ticketing.views.TerminalPage" />
+    </pages>
+</workunit>

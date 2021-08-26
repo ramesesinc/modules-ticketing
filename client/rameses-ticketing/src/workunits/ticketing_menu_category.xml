@@ -1,0 +1,11 @@
+<workunit extends="com/rameses/menu/templates/FXMenuCategory.xml" context="ticketing" cols="2">
+    <invokers>
+        <invoker type="home.action" 
+                 icon="home/icons/folder.png"
+                 role=".*"
+                 caption="Ticketing" 
+                 notificationid="ticketing"
+                 index="1" action="init"/>
+    </invokers> 
+    <code class="com.rameses.menu.models.FXMenuCategoryModel" />
+</workunit>

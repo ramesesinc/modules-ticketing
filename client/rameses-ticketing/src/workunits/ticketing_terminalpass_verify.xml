@@ -1,0 +1,14 @@
+<workunit>
+    <invokers>
+        <invoker folderid="menucategory/ticketing/tool" 
+                 caption="Verify Terminal Pass" action="init" 
+                 role="MASTER,COLLECTOR" 
+                 target="popup" />
+    </invokers>
+    
+    <code class="com.rameses.etracs.ticketing.models.TerminalPassVerifyModel" /> 
+    
+    <pages>
+        <page template="com.rameses.etracs.ticketing.views.TerminalPassVerifyPage" />
+    </pages>    
+</workunit>

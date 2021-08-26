@@ -15,23 +15,33 @@ public class TicketingCashReceiptModel extends CommonCashReceiptModel {
     
     int numfil = 0;
     int numnonfil = 0;
-        
+    
     public String getCashReceiptServiceName() {
         return "TicketingCashReceiptService";
     }
     
+    public def start() { 
+        return super.start(); 
+    }
+    
     void findTxn() {
         txnid = "default";
+
         def v = [:];
         v.numadult = numadult;
         v.numchildren = numchildren;
         v.numsenior = numsenior;
         v.numfil = numfil;
         v.numnonfil = numnonfil;
+        v.tag = entity.tag; 
+        v.route = entity.route;
         query.info = v;
         
         super.findTxn();
     }
     
-    
+    void afterPrintReceipt() {
+        def printModel = new TerminalPassPrintModel();
+        printModel.printTickets( entity ); 
+    }
 }

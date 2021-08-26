@@ -1,0 +1,21 @@
+<workunit extends="com/rameses/seti2/templates/CrudNodeList.xml" 
+          schemaName="ticketing_terminal" 
+          allowCreate="false" allowDelete="false" allowOpen="false" >
+
+    <invokers>
+        <invoker folderid="explorer/master/ticketing" 
+                 caption="Terminals" action="init"
+                 role="MASTER" 
+                 cols="objid,name,address" 
+                 hiddenCols="state" 
+                 allowCreate="true" allowOpen="true" allowDelete="true" />
+
+        <invoker folderid="menucategory/ticketing/mgmt" 
+                 caption="View Terminals" action="init" 
+                 role="SHARED" 
+                 cols="objid,name,address" 
+                 hiddenCols="state" />
+    </invokers>
+    
+    <code class="com.rameses.etracs.ticketing.models.TerminalListModel" />     
+</workunit>

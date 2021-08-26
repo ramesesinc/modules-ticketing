@@ -1,0 +1,9 @@
+"entity.*" [ 1==1 ] {
+    enabled: false; 
+}
+"entity.*" [ mode == 'create' || mode == 'edit' ] {
+    enabled: true; 
+} 
+"entity.objid" [ mode == 'edit' ] {
+    enabled: false;
+}

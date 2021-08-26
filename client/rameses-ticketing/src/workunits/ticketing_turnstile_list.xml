@@ -1,0 +1,21 @@
+<workunit extends="com/rameses/seti2/templates/CrudNodeList.xml" 
+          schemaName="ticketing_turnstile" 
+          allowCreate="false" allowDelete="false" allowOpen="false" >
+
+    <invokers>
+        <invoker folderid="explorer/master/ticketing" 
+                 caption="Turnstiles" action="init"
+                 role="MASTER" 
+                 cols="objid,title,location,dtfiled,createdby.name,tags" 
+                 hiddenCols="state" 
+                 allowCreate="true" allowOpen="true" 
+                 allowDelete="#{entity?.state.toString().toUpperCase().matches('ACTIVE|INACTIVE') == true}" />
+
+        <invoker folderid="menucategory/ticketing/mgmt" 
+                 caption="View Turnstiles" action="init" 
+                 role="SHARED" 
+                 cols="objid,title,location,dtfiled,createdby.name,tags" />
+    </invokers>
+    
+    <code class="com.rameses.etracs.ticketing.models.TurnstileListModel" />     
+</workunit>

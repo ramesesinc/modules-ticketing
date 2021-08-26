@@ -19,3 +19,5 @@ Thumbs.db
 _build
 
 /client/rameses-ticketing/nbproject/private/
+/client/rameses-ticketing/dist/
+/client/rameses-ticketing/build/
