@@ -1,28 +1,57 @@
 import com.rameses.annotations.*;
-import com.rameses.services.extended.*;
 
 class OnlineTicketingService {
+
 	@Service('DateService')
 	def dtSvc;
 
-	//TODO: to be replaced by rules
-	@DataContext('itemaccount')
-	def em_itemaccount
+	@Service('TicketingCashReceiptService')
+	def cashReceiptSvc; 
+
+
+	@DataContext('ticketing_terminal')
+	def em_terminal;
+
 
 	@ProxyMethod
-	public def getBilling(params) {
-		def bill = [:];
-		bill.billno = 'B00121';
+	public def getRoutes() { 
+		return em_terminal.find([ state: 'ACTIVE' ]).orderBy('name').list(); 
+	}
+
+	@ProxyMethod
+	public def getBilling( info ) { 
+        // 
+		// Required Parameter Structures: 
+		// 
+		// info = [
+		// 	  route: [ objid: 'x', name: 'x'], 
+		// 	  numadult: 2, 
+		// 	  numchildren: 0, 
+		// 	  numsenior: 0, 
+		// 	  numfil: 0, 
+		// 	  numnonfil: 0, 
+		// 	  tag: 'TOURIST' 
+		// ]; 
+        // 
+
+        if ( !info ) throw new Exception("info  parameter is required in getBilling"); 
+
+        if ( !info.tag ) throw new Exception("info.tag  parameter is requried in getBilling"); 
+
+        def arg0 = [ params: [ info: info ]];
+		def res = cashReceiptSvc.getBilling( arg0 ); 
+
+		def bill = [ items: [], amount: 0.0 ];
 		bill.billdate = dtSvc.serverDate;
-		bill.amount = 150.0;
+		bill.billno = 'B00121';
 
-		def terminalfeeacct = em_itemaccount.find([objid: 'TERMINAL_FEE']).first();
-		def environmentalfeeacct = em_itemaccount.find([objid: 'ENVIRONMENTAL_FEE']).first();
-
-		bill.items = [
-			[item: terminalfeeacct, amount: 100.0],
-			[item: environmentalfeeacct, amount: 50.0],
-		]
+		res.billitems.each{
+			bill.items << [ 
+				item: it.item, amount: it.amount, 
+				discount: it.discount, total: it.total 
+			]; 
+			bill.amount += it.total;
+		} 
 
 		return bill;
 	}
