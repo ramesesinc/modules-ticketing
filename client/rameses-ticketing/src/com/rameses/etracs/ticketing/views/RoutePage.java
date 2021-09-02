@@ -14,12 +14,12 @@ import com.rameses.seti2.views.CrudFormPage;
  */
 @StyleSheet 
 @Template(CrudFormPage.class)
-public class TerminalPage extends javax.swing.JPanel {
+public class RoutePage extends javax.swing.JPanel {
 
     /**
-     * Creates new form TerminalPage
+     * Creates new form RoutePage
      */
-    public TerminalPage() {
+    public RoutePage() {
         initComponents();
     }
 
@@ -34,9 +34,12 @@ public class TerminalPage extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
-        xLookupField1 = new com.rameses.rcp.control.XLookupField();
         xTextField1 = new com.rameses.rcp.control.XTextField();
+        xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
+        xLookupField1 = new com.rameses.rcp.control.XLookupField();
         xLabel1 = new com.rameses.rcp.control.XLabel();
+        xLookupField2 = new com.rameses.rcp.control.XLookupField();
+        xLabel2 = new com.rameses.rcp.control.XLabel();
 
         setMinimumSize(new java.awt.Dimension(750, 256));
         setPreferredSize(new java.awt.Dimension(750, 256));
@@ -49,27 +52,51 @@ public class TerminalPage extends javax.swing.JPanel {
         xFormPanel1.setCaptionWidth(100);
         xFormPanel1.setCellspacing(4);
 
-        xLookupField1.setCaption("Org");
+        xTextField1.setCaption("Title");
+        xTextField1.setName("entity.name"); // NOI18N
+        xTextField1.setRequired(true);
+        xTextField1.setStretchWidth(100);
+        xFormPanel1.add(xTextField1);
+
+        xIntegerField1.setCaption("Sort Order");
+        xIntegerField1.setName("entity.sortorder"); // NOI18N
+        xIntegerField1.setCellPadding(new java.awt.Insets(0, 0, 15, 0));
+        xIntegerField1.setRequired(true);
+        xFormPanel1.add(xIntegerField1);
+
+        xLookupField1.setCaption("Origin");
         xLookupField1.setExpression("#{(item ? [item.objid, item.name].join(' - ') : '')}");
         xLookupField1.setHandler("lookupOrg");
-        xLookupField1.setName("entity.org"); // NOI18N
+        xLookupField1.setName("entity.origin"); // NOI18N
         xLookupField1.setIndex(4);
         xLookupField1.setRequired(true);
         xLookupField1.setStretchWidth(100);
         xFormPanel1.add(xLookupField1);
 
-        xTextField1.setCaption("Address");
-        xTextField1.setName("entity.address"); // NOI18N
-        xTextField1.setRequired(true);
-        xTextField1.setStretchWidth(100);
-        xFormPanel1.add(xTextField1);
-
-        xLabel1.setCaption("Status");
-        xLabel1.setExpression("#{entity.state}");
+        xLabel1.setCaption(" ");
+        xLabel1.setDepends(new String[] {"entity.origin"});
+        xLabel1.setExpression("#{entity.origin.address}");
         xLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(180, 180, 180)));
         xLabel1.setPreferredSize(new java.awt.Dimension(100, 20));
         xLabel1.setStretchWidth(100);
         xFormPanel1.add(xLabel1);
+
+        xLookupField2.setCaption("Destination");
+        xLookupField2.setExpression("#{(item ? [item.objid, item.name].join(' - ') : '')}");
+        xLookupField2.setHandler("lookupOrg");
+        xLookupField2.setName("entity.destination"); // NOI18N
+        xLookupField2.setCellPadding(new java.awt.Insets(15, 0, 0, 0));
+        xLookupField2.setIndex(4);
+        xLookupField2.setStretchWidth(100);
+        xFormPanel1.add(xLookupField2);
+
+        xLabel2.setCaption(" ");
+        xLabel2.setDepends(new String[] {"entity.destination"});
+        xLabel2.setExpression("#{entity.destination.address}");
+        xLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(180, 180, 180)));
+        xLabel2.setPreferredSize(new java.awt.Dimension(100, 20));
+        xLabel2.setStretchWidth(100);
+        xFormPanel1.add(xLabel2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -109,8 +136,11 @@ public class TerminalPage extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
+    private com.rameses.rcp.control.XIntegerField xIntegerField1;
     private com.rameses.rcp.control.XLabel xLabel1;
+    private com.rameses.rcp.control.XLabel xLabel2;
     private com.rameses.rcp.control.XLookupField xLookupField1;
+    private com.rameses.rcp.control.XLookupField xLookupField2;
     private com.rameses.rcp.control.XTextField xTextField1;
     // End of variables declaration//GEN-END:variables
 }

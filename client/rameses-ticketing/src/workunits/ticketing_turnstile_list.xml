@@ -4,8 +4,8 @@
 
     <invokers>
         <invoker folderid="explorer/master/ticketing" 
-                 caption="Turnstiles" action="init"
-                 role="MASTER" 
+                 caption="Turnstiles" action="init" 
+                 role="MASTER" index="-80" 
                  cols="objid,title,location,dtfiled,createdby.name,tags" 
                  hiddenCols="state" 
                  allowCreate="true" allowOpen="true" 
@@ -13,7 +13,7 @@
 
         <invoker folderid="menucategory/ticketing/mgmt" 
                  caption="View Turnstiles" action="init" 
-                 role="SHARED" 
+                 role="SHARED" index="-80" 
                  cols="objid,title,location,dtfiled,createdby.name,tags" />
     </invokers>
     

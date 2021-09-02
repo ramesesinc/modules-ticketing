@@ -5,14 +5,14 @@
     <invokers>
         <invoker folderid="explorer/master/ticketing" 
                  caption="Terminals" action="init"
-                 role="MASTER" 
+                 role="MASTER" index="-100" 
                  cols="objid,name,address" 
                  hiddenCols="state" 
                  allowCreate="true" allowOpen="true" allowDelete="true" />
 
         <invoker folderid="menucategory/ticketing/mgmt" 
                  caption="View Terminals" action="init" 
-                 role="SHARED" 
+                 role="SHARED" index="-100" 
                  cols="objid,name,address" 
                  hiddenCols="state" />
     </invokers>
