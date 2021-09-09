@@ -56,24 +56,40 @@ const PrivacyStatement = ({ open, onAccept }) => {
         Data collection happens when the user encodes their
         personal data in the online health declaration form; and when the QR Code
         of the user is scanned in the scanning stations which both uses a secure
-        connection to the PGA Servers. 4. Information Security PGA implements
-        appropriate security protocols to prevent unauthorized access to personal
+        connection to the PGA Servers. 
+        </p>
+        <p style={styles.section}>4. Information Security</p>
+        <p style={styles.text}>
+        PGA implements appropriate security protocols to prevent unauthorized access to personal
         data. These include encryption of data transmission, validation of user
         credentials before granting of access, password requirements for login
         access, user level access and functionality depending on user category and
         backup procedures. These security protocols are continuously evaluated and
-        updated as the need arises. 5. Data Sharing PGA may share data in so far
+        updated as the need arises. 
+        </p>
+        <p style={styles.section}>5. Data Sharing</p>
+        <p style={styles.text}>
+        PGA may share data in so far
         as the Republic Act No. 10173 or the Data Privacy Act of 2012, and its
         implementing rules and regulations, issuances of the National Privacy
-        Commission (NPC) and other relevant laws allow it. 6. Retention and
-        Deletion PGA retains personal data as long as necessary for processing in
+        Commission (NPC) and other relevant laws allow it. 
+        </p>
+        <p style={styles.section}>6. Retention and Deletion</p>
+        <p style={styles.text}>
+        PGA retains personal data as long as necessary for processing in
         accordance to purposes stated herein and in compliance with other relevant
         and applicable laws particularly its obligations under Republic Act No.
-        9470 or the National Archives of the Philippines Act of 2007. 7. Access,
-        and Correction of Personal Database Users have the right to access their
+        9470 or the National Archives of the Philippines Act of 2007. 
+        </p>
+        <p style={styles.section}>7. Access, and Correction of Personal Database</p>
+        <p style={styles.text}> 
+        Users have the right to access their
         personal data and any personal profile information that may be incorrect
-        can be changed by the user or requested to be changed. 8. Right to
-        Complain If users believe that their data is processed in violation of
+        can be changed by the user or requested to be changed. 
+        </p>
+        <p style={styles.section}>8. Right to Complain</p>
+        <p style={styles.text}>
+        If users believe that their data is processed in violation of
         their rights, they can send their complaint to touristboracay@gmail.com to
         resolve or clarify the issue before formally filing with the National
         Privacy Commission (NPC). 9. Controller and Contact Information This
@@ -101,7 +117,7 @@ const styles = {
     opacity: 0.8
   },
   text: {
-    fontSize: 12,
+    fontSize: 14,
     opacity: 0.8
   }
 };

@@ -9,18 +9,23 @@ const TermsAndConditions = ({ open, onAccept }) => {
       onAccept={onAccept} 
       showCancel={false}
     >
-      {/* <div style={styles.container}> */}
-        <p style={styles.text}>
-          This application will require you to provide information that will 
-          require consent.
-        </p>
-        <p style={styles.text}>
-          The information will be used for this transaction and
-          for tourism purposes. In compliance with RA 10173 or Data
-          Privacy Act of the Philippines, your data will not be
-          used for other purposes except for the above mentioned.
-        </p>
-      {/* </div> */}
+      <div style={styles.container}>
+        <ol>
+          <li style={styles.text}>
+            This application requires you to provide information that will 
+            require consent.
+          </li>
+          <li style={styles.text}>
+            The information will be used for this transaction and
+            for tourism purposes. In compliance with RA 10173 or Data
+            Privacy Act of the Philippines, your data will not be
+            used for other purposes except for the above mentioned.
+          </li>
+          <li style={styles.text}>
+            No refunds and discounts will be provided for any online transactions.
+          </li>
+        </ol>
+      </div>
     </Modal>
   );
 };
@@ -34,7 +39,8 @@ const styles = {
   },
   text: {
     fontSize: 12,
-    opacity: 0.8
+    opacity: 0.8,
+    marginBottom: 10,
   }
 };
 
