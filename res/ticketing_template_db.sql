@@ -34,13 +34,10 @@ CREATE TABLE `cashreceipt_terminal` (
   `numsenior` int(11) NOT NULL DEFAULT '0',
   `numfil` int(11) NOT NULL DEFAULT '0',
   `numnonfil` int(11) NOT NULL DEFAULT '0',
-  `routeid` varchar(50) NOT NULL,
   PRIMARY KEY (`objid`),
   KEY `ix_dtfiled` (`dtfiled`),
   KEY `ix_seqno` (`startseqno`,`endseqno`),
-  KEY `ix_tag` (`tag`),
-  KEY `fk_cashreceipt_terminal_routeid` (`routeid`),
-  CONSTRAINT `fk_cashreceipt_terminal_routeid` FOREIGN KEY (`routeid`) REFERENCES `terminal` (`objid`)
+  KEY `ix_tag` (`tag`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -50,7 +47,42 @@ CREATE TABLE `cashreceipt_terminal` (
 
 LOCK TABLES `cashreceipt_terminal` WRITE;
 /*!40000 ALTER TABLE `cashreceipt_terminal` DISABLE KEYS */;
+INSERT INTO `cashreceipt_terminal` VALUES ('RCT27175720:17ba505f089:-7e70','2021-09-02 16:36:22','CAT211000003','CAT211000006',1,0,0.0000,'TOURIST',1,0,0),('RCT27175720:17ba505f089:-7eaa','2021-09-02 16:18:49','CAT211000001','CAT211000002',1,0,0.0000,'TOURIST',0,0,0);
 /*!40000 ALTER TABLE `cashreceipt_terminal` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `route`
+--
+
+DROP TABLE IF EXISTS `route`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `route` (
+  `objid` varchar(50) NOT NULL,
+  `state` varchar(25) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `sortorder` int(255) NOT NULL DEFAULT '0',
+  `originid` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `destinationid` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  PRIMARY KEY (`objid`),
+  UNIQUE KEY `uix_originid_destinationid` (`originid`,`destinationid`),
+  KEY `ix_destinationid` (`destinationid`) USING BTREE,
+  KEY `ix_originid` (`originid`) USING BTREE,
+  KEY `ix_name` (`name`) USING BTREE,
+  CONSTRAINT `fk_route_destinationid` FOREIGN KEY (`destinationid`) REFERENCES `terminal` (`objid`),
+  CONSTRAINT `fk_route_originid` FOREIGN KEY (`originid`) REFERENCES `terminal` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `route`
+--
+
+LOCK TABLES `route` WRITE;
+/*!40000 ALTER TABLE `route` DISABLE KEYS */;
+INSERT INTO `route` VALUES ('ROUTE290d16d3:17ba01919c0:-7ef0','ACTIVE','CATICLAN - CAGBAN',0,'CAT','CAG'),('ROUTE5e26f8cc:17ba02c32c0:-7f77','ACTIVE','CAGBAN - CATICLAN',1,'CAG','CAT');
+/*!40000 ALTER TABLE `route` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -422,7 +454,7 @@ CREATE TABLE `sys_rule` (
 
 LOCK TABLES `sys_rule` WRITE;
 /*!40000 ALTER TABLE `sys_rule` DISABLE KEYS */;
-INSERT INTO `sys_rule` VALUES ('RUL444ab933:17b716eb67b:-749f','DEPLOYED','TERMINAL_FEE_RORO','ticketingbilling','compute-fee','TERMINAL FEE - RORO',NULL,50000,NULL,NULL,'2021-08-23 14:50:02','USR-387c58c4:1525ca5d175:-7a80','AILEENT',1),('RUL444ab933:17b716eb67b:-7dac','DEPLOYED','TERMINAL_FEE_TOURIST','ticketingbilling','compute-fee','TERMINAL FEE - TOURIST',NULL,50000,NULL,NULL,'2021-08-23 14:35:50','USR-387c58c4:1525ca5d175:-7a80','AILEENT',1);
+INSERT INTO `sys_rule` VALUES ('RUL-51728e1f:17ba4d50128:-75fe','DEPLOYED','TOURIST_FEE_CAGBAN','ticketingbilling','compute-fee','TOURIST FEE CAGBAN',NULL,50000,NULL,NULL,'2021-09-02 13:52:55','USR24c72011:17b9f749b0e:-7e78','JDC',1),('RUL-51728e1f:17ba4d50128:-76e2','DEPLOYED','TOURIST_FEE_CATICLAN','ticketingbilling','compute-fee','TOURIST FEE CATICLAN',NULL,50000,NULL,NULL,'2021-09-02 13:52:17','USR24c72011:17b9f749b0e:-7e78','JDC',1),('RUL444ab933:17b716eb67b:-749f','APPROVED','TERMINAL_FEE_RORO','ticketingbilling','compute-fee','TERMINAL FEE - RORO',NULL,50000,NULL,NULL,'2021-08-23 14:50:02','USR-387c58c4:1525ca5d175:-7a80','AILEENT',1);
 /*!40000 ALTER TABLE `sys_rule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -453,7 +485,7 @@ CREATE TABLE `sys_rule_action` (
 
 LOCK TABLES `sys_rule_action` WRITE;
 /*!40000 ALTER TABLE `sys_rule_action` DISABLE KEYS */;
-INSERT INTO `sys_rule_action` VALUES ('RA-6ad40b85:17b71c5f331:-7ffb','RUL444ab933:17b716eb67b:-749f','treasury.actions.AddBillItem','add-billitem',0),('RA342077c6:17b716a5f00:-7ff7','RUL444ab933:17b716eb67b:-7dac','treasury.actions.AddBillItem','add-billitem',0);
+INSERT INTO `sys_rule_action` VALUES ('RA-6ad40b85:17b71c5f331:-7ffb','RUL444ab933:17b716eb67b:-749f','treasury.actions.AddBillItem','add-billitem',0),('RA-bff63a1:17ba4ba0cf7:-7fee','RUL-51728e1f:17ba4d50128:-75fe','treasury.actions.AddBillItem','add-billitem',0),('RA-bff63a1:17ba4ba0cf7:-7ff5','RUL-51728e1f:17ba4d50128:-76e2','treasury.actions.AddBillItem','add-billitem',0);
 /*!40000 ALTER TABLE `sys_rule_action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -486,8 +518,8 @@ CREATE TABLE `sys_rule_action_param` (
   KEY `ix_var_objid` (`var_objid`),
   KEY `ix_var_name` (`var_name`),
   KEY `ix_obj_key` (`obj_key`),
-  CONSTRAINT `fk_sys_rule_action_param_obj_key` FOREIGN KEY (`obj_key`) REFERENCES `ticketing_itemaccount` (`objid`),
   CONSTRAINT `fk_sys_rule_action_param_actiondefparam_objid` FOREIGN KEY (`actiondefparam_objid`) REFERENCES `sys_rule_actiondef_param` (`objid`),
+  CONSTRAINT `fk_sys_rule_action_param_obj_key` FOREIGN KEY (`obj_key`) REFERENCES `ticketing_itemaccount` (`objid`),
   CONSTRAINT `fk_sys_rule_action_param_parentid` FOREIGN KEY (`parentid`) REFERENCES `sys_rule_action` (`objid`),
   CONSTRAINT `fk_sys_rule_action_param_var_objid` FOREIGN KEY (`var_objid`) REFERENCES `sys_rule_condition_var` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -499,7 +531,7 @@ CREATE TABLE `sys_rule_action_param` (
 
 LOCK TABLES `sys_rule_action_param` WRITE;
 /*!40000 ALTER TABLE `sys_rule_action_param` DISABLE KEYS */;
-INSERT INTO `sys_rule_action_param` VALUES ('RAP-6ad40b85:17b71c5f331:-7ff9','RA-6ad40b85:17b71c5f331:-7ffb','treasury.actions.AddBillItem.billcode',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'TERMINAL_FEE_-_TOURIST','TERMINAL FEE - TOURIST',NULL,NULL,NULL),('RAP-6ad40b85:17b71c5f331:-7ffa','RA-6ad40b85:17b71c5f331:-7ffb','treasury.actions.AddBillItem.amount',NULL,NULL,NULL,NULL,'NUM_ADULT * 50','expression',NULL,NULL,NULL,NULL,NULL,NULL),('RAP342077c6:17b716a5f00:-7ff6','RA342077c6:17b716a5f00:-7ff7','treasury.actions.AddBillItem.amount',NULL,NULL,NULL,NULL,'NUM_ADULT * 100','expression',NULL,NULL,NULL,NULL,NULL,NULL),('RULACT444ab933:17b716eb67b:-74d2','RA342077c6:17b716a5f00:-7ff7','treasury.actions.AddBillItem.billcode',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'TERMINAL_FEE_-_TOURIST','TERMINAL FEE - TOURIST',NULL,NULL,NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP-6ad40b85:17b71c5f331:-7ff9','RA-6ad40b85:17b71c5f331:-7ffb','treasury.actions.AddBillItem.billcode',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'TERMINAL_FEE_-_TOURIST','TERMINAL FEE - TOURIST',NULL,NULL,NULL),('RAP-6ad40b85:17b71c5f331:-7ffa','RA-6ad40b85:17b71c5f331:-7ffb','treasury.actions.AddBillItem.amount',NULL,NULL,NULL,NULL,'NUM_ADULT * 50','expression',NULL,NULL,NULL,NULL,NULL,NULL),('RAP-bff63a1:17ba4ba0cf7:-7fec','RA-bff63a1:17ba4ba0cf7:-7fee','treasury.actions.AddBillItem.billcode',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'TOURIST_FEE_CAGBAN','TOURIST FEE CAGBAN',NULL,NULL,NULL),('RAP-bff63a1:17ba4ba0cf7:-7fed','RA-bff63a1:17ba4ba0cf7:-7fee','treasury.actions.AddBillItem.amount',NULL,NULL,NULL,NULL,'NUM_ADULT * 100','expression',NULL,NULL,NULL,NULL,NULL,NULL),('RAP-bff63a1:17ba4ba0cf7:-7ff3','RA-bff63a1:17ba4ba0cf7:-7ff5','treasury.actions.AddBillItem.amount',NULL,NULL,NULL,NULL,'NUM_ADULT * 100','expression',NULL,NULL,NULL,NULL,NULL,NULL),('RAP-bff63a1:17ba4ba0cf7:-7ff4','RA-bff63a1:17ba4ba0cf7:-7ff5','treasury.actions.AddBillItem.billcode',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'TOURIST_FEE_CATICLAN','TOURIST FEE CATICLAN',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `sys_rule_action_param` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -608,7 +640,7 @@ CREATE TABLE `sys_rule_condition` (
 
 LOCK TABLES `sys_rule_condition` WRITE;
 /*!40000 ALTER TABLE `sys_rule_condition` DISABLE KEYS */;
-INSERT INTO `sys_rule_condition` VALUES ('RC-6ad40b85:17b71c5f331:-8000','RUL444ab933:17b716eb67b:-749f','ticketing.facts.TicketInfo','ticketing.facts.TicketInfo',NULL,0,NULL,NULL,NULL,NULL,NULL,0),('RC342077c6:17b716a5f00:-7ffb','RUL444ab933:17b716eb67b:-7dac','ticketing.facts.TicketInfo','ticketing.facts.TicketInfo',NULL,0,NULL,NULL,NULL,NULL,NULL,0);
+INSERT INTO `sys_rule_condition` VALUES ('RC-6ad40b85:17b71c5f331:-8000','RUL444ab933:17b716eb67b:-749f','ticketing.facts.TicketInfo','ticketing.facts.TicketInfo',NULL,0,NULL,NULL,NULL,NULL,NULL,0),('RC-bff63a1:17ba4ba0cf7:-7ff2','RUL-51728e1f:17ba4d50128:-75fe','ticketing.facts.TicketInfo','ticketing.facts.TicketInfo',NULL,0,NULL,NULL,NULL,NULL,NULL,0),('RC-bff63a1:17ba4ba0cf7:-7ff9','RUL-51728e1f:17ba4d50128:-76e2','ticketing.facts.TicketInfo','ticketing.facts.TicketInfo',NULL,0,NULL,NULL,NULL,NULL,NULL,0);
 /*!40000 ALTER TABLE `sys_rule_condition` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -652,7 +684,7 @@ CREATE TABLE `sys_rule_condition_constraint` (
 
 LOCK TABLES `sys_rule_condition_constraint` WRITE;
 /*!40000 ALTER TABLE `sys_rule_condition_constraint` DISABLE KEYS */;
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-6ad40b85:17b71c5f331:-7ffc','RC-6ad40b85:17b71c5f331:-8000','ticketing.facts.TicketInfo.tag','tag',NULL,'is any of the ff.','matches',NULL,NULL,NULL,NULL,NULL,NULL,'[[key:\"RORO_TOURIST\",value:\"RORO TOURIST\"]]',NULL,3),('RCC-6ad40b85:17b71c5f331:-7ffd','RC-6ad40b85:17b71c5f331:-8000','ticketing.facts.TicketInfo.numadult','numadult','NUM_ADULT',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1),('RCONST1c60cc04:17b81f2d9cc:-7d7f','RC-6ad40b85:17b71c5f331:-8000','ticketing.facts.TicketInfo.routeid','routeid',NULL,'is any of the ff.','matches',NULL,NULL,NULL,NULL,NULL,NULL,'[[key:\"1\",value:\"CATICLAN JETTY PORT TERMINAL\"]]',NULL,2),('RCONST1c60cc04:17b81f2d9cc:-7f3c','RC342077c6:17b716a5f00:-7ffb','ticketing.facts.TicketInfo.routeid','routeid',NULL,'is any of the ff.','matches',NULL,NULL,NULL,NULL,NULL,NULL,'[[key:\"1\",value:\"CATICLAN JETTY PORT TERMINAL\"]]',NULL,2),('RCONST444ab933:17b716eb67b:-78b6','RC342077c6:17b716a5f00:-7ffb','ticketing.facts.TicketInfo.numadult','numadult','NUM_ADULT',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1),('RCONST444ab933:17b716eb67b:-7b51','RC342077c6:17b716a5f00:-7ffb','ticketing.facts.TicketInfo.tag','tag',NULL,'is any of the ff.','matches',NULL,NULL,NULL,NULL,NULL,NULL,'[[key:\"TOURIST\",value:\"TOURIST\"]]',NULL,3);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-6ad40b85:17b71c5f331:-7ffc','RC-6ad40b85:17b71c5f331:-8000','ticketing.facts.TicketInfo.tag','tag',NULL,'is any of the ff.','matches',NULL,NULL,NULL,NULL,NULL,NULL,'[[key:\"RORO_TOURIST\",value:\"RORO TOURIST\"]]',NULL,3),('RCC-6ad40b85:17b71c5f331:-7ffd','RC-6ad40b85:17b71c5f331:-8000','ticketing.facts.TicketInfo.numadult','numadult','NUM_ADULT',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1),('RCC-bff63a1:17ba4ba0cf7:-7fef','RC-bff63a1:17ba4ba0cf7:-7ff2','ticketing.facts.TicketInfo.tag','tag',NULL,'is any of the ff.','matches',NULL,NULL,NULL,NULL,NULL,NULL,'[[key:\"TOURIST\",value:\"TOURIST\"]]',NULL,3),('RCC-bff63a1:17ba4ba0cf7:-7ff0','RC-bff63a1:17ba4ba0cf7:-7ff2','ticketing.facts.TicketInfo.numadult','numadult','NUM_ADULT',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1),('RCC-bff63a1:17ba4ba0cf7:-7ff1','RC-bff63a1:17ba4ba0cf7:-7ff2','ticketing.facts.TicketInfo.routeid','routeid',NULL,'is any of the ff.','matches',NULL,NULL,NULL,NULL,NULL,NULL,'[[key:\"ROUTE5e26f8cc:17ba02c32c0:-7f77\",value:\"CAGBAN - CATICLAN\"]]',NULL,2),('RCC-bff63a1:17ba4ba0cf7:-7ff6','RC-bff63a1:17ba4ba0cf7:-7ff9','ticketing.facts.TicketInfo.routeid','routeid',NULL,'is any of the ff.','matches',NULL,NULL,NULL,NULL,NULL,NULL,'[[key:\"ROUTE290d16d3:17ba01919c0:-7ef0\",value:\"CATICLAN - CAGBAN\"]]',NULL,2),('RCC-bff63a1:17ba4ba0cf7:-7ff7','RC-bff63a1:17ba4ba0cf7:-7ff9','ticketing.facts.TicketInfo.numadult','numadult','NUM_ADULT',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1),('RCC-bff63a1:17ba4ba0cf7:-7ff8','RC-bff63a1:17ba4ba0cf7:-7ff9','ticketing.facts.TicketInfo.tag','tag',NULL,'is any of the ff.','matches',NULL,NULL,NULL,NULL,NULL,NULL,'[[key:\"TOURIST\",value:\"TOURIST\"]]',NULL,3),('RCONST1c60cc04:17b81f2d9cc:-7d7f','RC-6ad40b85:17b71c5f331:-8000','ticketing.facts.TicketInfo.routeid','routeid',NULL,'is any of the ff.','matches',NULL,NULL,NULL,NULL,NULL,NULL,'[[key:\"ROUTE290d16d3:17ba01919c0:-7ef0\",value:\"CATICLAN - CAGBAN\"]]',NULL,2);
 /*!40000 ALTER TABLE `sys_rule_condition_constraint` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -683,7 +715,7 @@ CREATE TABLE `sys_rule_condition_var` (
 
 LOCK TABLES `sys_rule_condition_var` WRITE;
 /*!40000 ALTER TABLE `sys_rule_condition_var` DISABLE KEYS */;
-INSERT INTO `sys_rule_condition_var` VALUES ('RCC-6ad40b85:17b71c5f331:-7ffd','RC-6ad40b85:17b71c5f331:-8000','RUL444ab933:17b716eb67b:-749f','NUM_ADULT','integer',1),('RCONST444ab933:17b716eb67b:-78b6','RC342077c6:17b716a5f00:-7ffb','RUL444ab933:17b716eb67b:-7dac','NUM_ADULT','integer',1);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCC-6ad40b85:17b71c5f331:-7ffd','RC-6ad40b85:17b71c5f331:-8000','RUL444ab933:17b716eb67b:-749f','NUM_ADULT','integer',1),('RCC-bff63a1:17ba4ba0cf7:-7ff0','RC-bff63a1:17ba4ba0cf7:-7ff2','RUL-51728e1f:17ba4d50128:-75fe','NUM_ADULT','integer',1),('RCC-bff63a1:17ba4ba0cf7:-7ff7','RC-bff63a1:17ba4ba0cf7:-7ff9','RUL-51728e1f:17ba4d50128:-76e2','NUM_ADULT','integer',1);
 /*!40000 ALTER TABLE `sys_rule_condition_var` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -708,7 +740,7 @@ CREATE TABLE `sys_rule_deployed` (
 
 LOCK TABLES `sys_rule_deployed` WRITE;
 /*!40000 ALTER TABLE `sys_rule_deployed` DISABLE KEYS */;
-INSERT INTO `sys_rule_deployed` VALUES ('RUL444ab933:17b716eb67b:-749f','\npackage ticketingbilling.TERMINAL_FEE_RORO;\nimport ticketingbilling.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"TERMINAL_FEE_RORO\"\n	agenda-group \"compute-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 ticketing.facts.TicketInfo (  NUM_ADULT:numadult,routeid matches \"1\",tag matches \"RORO_TOURIST\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"NUM_ADULT\", NUM_ADULT );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"NUM_ADULT * 50\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"TERMINAL_FEE_-_TOURIST\", \"TERMINAL FEE - TOURIST\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	'),('RUL444ab933:17b716eb67b:-7dac','\npackage ticketingbilling.TERMINAL_FEE_TOURIST;\nimport ticketingbilling.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"TERMINAL_FEE_TOURIST\"\n	agenda-group \"compute-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 ticketing.facts.TicketInfo (  NUM_ADULT:numadult,routeid matches \"1\",tag matches \"TOURIST\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"NUM_ADULT\", NUM_ADULT );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"NUM_ADULT * 100\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"TERMINAL_FEE_-_TOURIST\", \"TERMINAL FEE - TOURIST\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL-51728e1f:17ba4d50128:-75fe','\npackage ticketingbilling.TOURIST_FEE_CAGBAN;\nimport ticketingbilling.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"TOURIST_FEE_CAGBAN\"\n	agenda-group \"compute-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 ticketing.facts.TicketInfo (  NUM_ADULT:numadult,routeid matches \"ROUTE5e26f8cc:17ba02c32c0:-7f77\",tag matches \"TOURIST\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"NUM_ADULT\", NUM_ADULT );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"NUM_ADULT * 100\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"TOURIST_FEE_CAGBAN\", \"TOURIST FEE CAGBAN\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	'),('RUL-51728e1f:17ba4d50128:-76e2','\npackage ticketingbilling.TOURIST_FEE_CATICLAN;\nimport ticketingbilling.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"TOURIST_FEE_CATICLAN\"\n	agenda-group \"compute-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 ticketing.facts.TicketInfo (  NUM_ADULT:numadult,routeid matches \"ROUTE290d16d3:17ba01919c0:-7ef0\",tag matches \"TOURIST\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"NUM_ADULT\", NUM_ADULT );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"NUM_ADULT * 100\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"TOURIST_FEE_CATICLAN\", \"TOURIST FEE CATICLAN\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	');
 /*!40000 ALTER TABLE `sys_rule_deployed` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -791,7 +823,7 @@ CREATE TABLE `sys_rule_fact_field` (
 
 LOCK TABLES `sys_rule_fact_field` WRITE;
 /*!40000 ALTER TABLE `sys_rule_fact_field` DISABLE KEYS */;
-INSERT INTO `sys_rule_fact_field` VALUES ('com.rameses.rules.common.CurrentDate.date','com.rameses.rules.common.CurrentDate','date','Date','date',4,'date',NULL,NULL,NULL,NULL,NULL,NULL,'date',NULL),('com.rameses.rules.common.CurrentDate.day','com.rameses.rules.common.CurrentDate','day','Day','integer',5,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('com.rameses.rules.common.CurrentDate.month','com.rameses.rules.common.CurrentDate','month','Month','integer',3,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('com.rameses.rules.common.CurrentDate.qtr','com.rameses.rules.common.CurrentDate','qtr','Qtr','integer',1,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('com.rameses.rules.common.CurrentDate.year','com.rameses.rules.common.CurrentDate','year','Year','integer',2,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('ticketing.facts.TicketInfo.numadult','ticketing.facts.TicketInfo','numadult','No. of Adult','integer',1,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('ticketing.facts.TicketInfo.numchildren','ticketing.facts.TicketInfo','numchildren','No. of Children','integer',2,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('ticketing.facts.TicketInfo.numfil','ticketing.facts.TicketInfo','numfil','No. of Filipino','integer',4,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('ticketing.facts.TicketInfo.numnonfil','ticketing.facts.TicketInfo','numnonfil','No. of Non-filipinos','integer',5,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('ticketing.facts.TicketInfo.numsenior','ticketing.facts.TicketInfo','numsenior','No. of Senior','integer',3,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('ticketing.facts.TicketInfo.routeid','ticketing.facts.TicketInfo','routeid','Route','string',7,'lookup','ticketing_terminal:lookup','objid','name',NULL,NULL,NULL,'string',NULL),('ticketing.facts.TicketInfo.tag','ticketing.facts.TicketInfo','tag','Tag','string',6,'lookup','ticketing_turnstile_category:lookup','objid','title',NULL,NULL,NULL,'string',NULL),('treasury.facts.BillItem.amount','treasury.facts.BillItem','amount','Amount','decimal',3,'decimal',NULL,NULL,NULL,NULL,NULL,NULL,'decimal',NULL),('treasury.facts.BillItem.billcode','treasury.facts.BillItem','billcode','Bill code','string',2,'lookup','market_itemaccount:lookup','objid','title',NULL,NULL,NULL,'string',NULL),('treasury.facts.BillItem.objid','treasury.facts.BillItem','objid','ObjID','string',1,'string',NULL,NULL,NULL,NULL,NULL,NULL,'string',NULL),('treasury.facts.BillItem.surcharge','treasury.facts.BillItem','surcharge','Surcharge','decimal',4,'decimal',NULL,NULL,NULL,NULL,NULL,NULL,'decimal',NULL),('treasury.facts.BillItem.tag','treasury.facts.BillItem','tag','Tag','string',5,'string',NULL,NULL,NULL,NULL,NULL,NULL,'string',NULL),('treasury.facts.CashReceipt.receiptdate','treasury.facts.CashReceipt','receiptdate','Receipt Date','date',2,'date',NULL,NULL,NULL,NULL,NULL,NULL,'date',NULL),('treasury.facts.CashReceipt.txnmode','treasury.facts.CashReceipt','txnmode','Txn Mode','string',1,'string',NULL,NULL,NULL,NULL,NULL,NULL,'string',NULL),('treasury.facts.CreditBillItem.amount','treasury.facts.CreditBillItem','amount','Amount','decimal',1,'decimal',NULL,NULL,NULL,NULL,NULL,NULL,'decimal',NULL),('treasury.facts.CreditBillItem.billcode','treasury.facts.CreditBillItem','billcode','Bill code','string',2,'lookup','waterworks_itemaccount:lookup','objid','title',NULL,NULL,NULL,'string',NULL),('treasury.facts.Deposit.amount','treasury.facts.Deposit','amount','Amount','decimal',1,'decimal',NULL,NULL,NULL,NULL,NULL,NULL,'decimal',NULL),('treasury.facts.ExcessPayment.amount','treasury.facts.ExcessPayment','amount','Amount','decimal',1,'decimal',NULL,NULL,NULL,NULL,NULL,NULL,'decimal',NULL),('treasury.facts.HolidayFact.id','treasury.facts.HolidayFact','id','ID','string',1,'string',NULL,NULL,NULL,NULL,NULL,NULL,'string',NULL),('treasury.facts.Payment.amount','treasury.facts.Payment','amount','Amount','decimal',1,'decimal',NULL,NULL,NULL,NULL,NULL,NULL,'decimal',NULL),('treasury.facts.Requirement.code','treasury.facts.Requirement','code','Code','string',1,'lookup','requirementtype:lookup','code','title',NULL,NULL,NULL,'string',NULL),('treasury.facts.Requirement.completed','treasury.facts.Requirement','completed','Completed','boolean',2,'boolean',NULL,NULL,NULL,NULL,NULL,NULL,'boolean',NULL),('treasury.facts.TransactionDate.date','treasury.facts.TransactionDate','date','Date','date',1,'date',NULL,NULL,NULL,NULL,NULL,NULL,'date',NULL),('treasury.facts.TransactionDate.day','treasury.facts.TransactionDate','day','Day','integer',4,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('treasury.facts.TransactionDate.month','treasury.facts.TransactionDate','month','Month','integer',3,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('treasury.facts.TransactionDate.qtr','treasury.facts.TransactionDate','qtr','Qtr','integer',5,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('treasury.facts.TransactionDate.tag','treasury.facts.TransactionDate','tag','Tag','string',6,'string',NULL,NULL,NULL,NULL,NULL,NULL,'string',NULL),('treasury.facts.TransactionDate.year','treasury.facts.TransactionDate','year','Year','integer',2,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('treasury.facts.VarInteger.tag','treasury.facts.VarInteger','tag','Tag','string',2,'string',NULL,NULL,NULL,NULL,NULL,NULL,'string',NULL),('treasury.facts.VarInteger.value','treasury.facts.VarInteger','value','Value','integer',1,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL);
+INSERT INTO `sys_rule_fact_field` VALUES ('com.rameses.rules.common.CurrentDate.date','com.rameses.rules.common.CurrentDate','date','Date','date',4,'date',NULL,NULL,NULL,NULL,NULL,NULL,'date',NULL),('com.rameses.rules.common.CurrentDate.day','com.rameses.rules.common.CurrentDate','day','Day','integer',5,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('com.rameses.rules.common.CurrentDate.month','com.rameses.rules.common.CurrentDate','month','Month','integer',3,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('com.rameses.rules.common.CurrentDate.qtr','com.rameses.rules.common.CurrentDate','qtr','Qtr','integer',1,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('com.rameses.rules.common.CurrentDate.year','com.rameses.rules.common.CurrentDate','year','Year','integer',2,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('ticketing.facts.TicketInfo.numadult','ticketing.facts.TicketInfo','numadult','No. of Adult','integer',1,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('ticketing.facts.TicketInfo.numchildren','ticketing.facts.TicketInfo','numchildren','No. of Children','integer',2,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('ticketing.facts.TicketInfo.numfil','ticketing.facts.TicketInfo','numfil','No. of Filipino','integer',4,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('ticketing.facts.TicketInfo.numnonfil','ticketing.facts.TicketInfo','numnonfil','No. of Non-filipinos','integer',5,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('ticketing.facts.TicketInfo.numsenior','ticketing.facts.TicketInfo','numsenior','No. of Senior','integer',3,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('ticketing.facts.TicketInfo.routeid','ticketing.facts.TicketInfo','routeid','Route','string',7,'lookup','ticketing_route:lookup','objid','name',NULL,NULL,NULL,'string',NULL),('ticketing.facts.TicketInfo.tag','ticketing.facts.TicketInfo','tag','Tag','string',6,'lookup','ticketing_turnstile_category:lookup','objid','title',NULL,NULL,NULL,'string',NULL),('treasury.facts.BillItem.amount','treasury.facts.BillItem','amount','Amount','decimal',3,'decimal',NULL,NULL,NULL,NULL,NULL,NULL,'decimal',NULL),('treasury.facts.BillItem.billcode','treasury.facts.BillItem','billcode','Bill code','string',2,'lookup','market_itemaccount:lookup','objid','title',NULL,NULL,NULL,'string',NULL),('treasury.facts.BillItem.objid','treasury.facts.BillItem','objid','ObjID','string',1,'string',NULL,NULL,NULL,NULL,NULL,NULL,'string',NULL),('treasury.facts.BillItem.surcharge','treasury.facts.BillItem','surcharge','Surcharge','decimal',4,'decimal',NULL,NULL,NULL,NULL,NULL,NULL,'decimal',NULL),('treasury.facts.BillItem.tag','treasury.facts.BillItem','tag','Tag','string',5,'string',NULL,NULL,NULL,NULL,NULL,NULL,'string',NULL),('treasury.facts.CashReceipt.receiptdate','treasury.facts.CashReceipt','receiptdate','Receipt Date','date',2,'date',NULL,NULL,NULL,NULL,NULL,NULL,'date',NULL),('treasury.facts.CashReceipt.txnmode','treasury.facts.CashReceipt','txnmode','Txn Mode','string',1,'string',NULL,NULL,NULL,NULL,NULL,NULL,'string',NULL),('treasury.facts.CreditBillItem.amount','treasury.facts.CreditBillItem','amount','Amount','decimal',1,'decimal',NULL,NULL,NULL,NULL,NULL,NULL,'decimal',NULL),('treasury.facts.CreditBillItem.billcode','treasury.facts.CreditBillItem','billcode','Bill code','string',2,'lookup','waterworks_itemaccount:lookup','objid','title',NULL,NULL,NULL,'string',NULL),('treasury.facts.Deposit.amount','treasury.facts.Deposit','amount','Amount','decimal',1,'decimal',NULL,NULL,NULL,NULL,NULL,NULL,'decimal',NULL),('treasury.facts.ExcessPayment.amount','treasury.facts.ExcessPayment','amount','Amount','decimal',1,'decimal',NULL,NULL,NULL,NULL,NULL,NULL,'decimal',NULL),('treasury.facts.HolidayFact.id','treasury.facts.HolidayFact','id','ID','string',1,'string',NULL,NULL,NULL,NULL,NULL,NULL,'string',NULL),('treasury.facts.Payment.amount','treasury.facts.Payment','amount','Amount','decimal',1,'decimal',NULL,NULL,NULL,NULL,NULL,NULL,'decimal',NULL),('treasury.facts.Requirement.code','treasury.facts.Requirement','code','Code','string',1,'lookup','requirementtype:lookup','code','title',NULL,NULL,NULL,'string',NULL),('treasury.facts.Requirement.completed','treasury.facts.Requirement','completed','Completed','boolean',2,'boolean',NULL,NULL,NULL,NULL,NULL,NULL,'boolean',NULL),('treasury.facts.TransactionDate.date','treasury.facts.TransactionDate','date','Date','date',1,'date',NULL,NULL,NULL,NULL,NULL,NULL,'date',NULL),('treasury.facts.TransactionDate.day','treasury.facts.TransactionDate','day','Day','integer',4,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('treasury.facts.TransactionDate.month','treasury.facts.TransactionDate','month','Month','integer',3,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('treasury.facts.TransactionDate.qtr','treasury.facts.TransactionDate','qtr','Qtr','integer',5,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('treasury.facts.TransactionDate.tag','treasury.facts.TransactionDate','tag','Tag','string',6,'string',NULL,NULL,NULL,NULL,NULL,NULL,'string',NULL),('treasury.facts.TransactionDate.year','treasury.facts.TransactionDate','year','Year','integer',2,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL),('treasury.facts.VarInteger.tag','treasury.facts.VarInteger','tag','Tag','string',2,'string',NULL,NULL,NULL,NULL,NULL,NULL,'string',NULL),('treasury.facts.VarInteger.value','treasury.facts.VarInteger','value','Value','integer',1,'integer',NULL,NULL,NULL,NULL,NULL,NULL,'integer',NULL);
 /*!40000 ALTER TABLE `sys_rule_fact_field` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -927,6 +959,7 @@ CREATE TABLE `sys_sequence` (
 
 LOCK TABLES `sys_sequence` WRITE;
 /*!40000 ALTER TABLE `sys_sequence` DISABLE KEYS */;
+INSERT INTO `sys_sequence` VALUES ('CAT211-ticketing',7);
 /*!40000 ALTER TABLE `sys_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -990,7 +1023,7 @@ CREATE TABLE `sys_user` (
 
 LOCK TABLES `sys_user` WRITE;
 /*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;
-INSERT INTO `sys_user` VALUES ('USR-56431050:1497de4bc1b:-7fec','ADMIN','ADMIN','ADMIN','.','ADMIN, ADMIN .','.','.');
+INSERT INTO `sys_user` VALUES ('USR-48c6872f:17b9f7070a0:-7e77','ADMIN','ADMIN','ADMIN','ADMIN','ADMIN, ADMIN ADMIN','ADMIN',NULL),('USR24c72011:17b9f749b0e:-7e78','JDC','JUAN','DELA CRUZ','M','DELA CRUZ, JUAN M','COLLECTOR','JDC');
 /*!40000 ALTER TABLE `sys_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1029,7 +1062,7 @@ CREATE TABLE `sys_user_role` (
 
 LOCK TABLES `sys_user_role` WRITE;
 /*!40000 ALTER TABLE `sys_user_role` DISABLE KEYS */;
-INSERT INTO `sys_user_role` VALUES ('UGM-260d43786506133163522fb6daa9e03a','WF_EDITOR','USR-56431050:1497de4bc1b:-7fec','ADMIN',NULL,NULL,NULL,NULL,'UGM-260d43786506133163522fb6daa9e03a'),('UGM-7a53d99f:17b4e227088:-7fa3','ADMIN','USR-56431050:1497de4bc1b:-7fec','ADMIN',NULL,NULL,NULL,NULL,'UGM-7a53d99f:17b4e227088:-7fa3'),('UGM-ab80f49b7d9aaf1bf182649afcc1cb3e','RULE_AUTHOR','USR-56431050:1497de4bc1b:-7fec','ADMIN',NULL,NULL,NULL,NULL,'UGM-ab80f49b7d9aaf1bf182649afcc1cb3e'),('USRROL733085c2:17b62206af7:-7ffe','REPORT','USR-56431050:1497de4bc1b:-7fec','ADMIN',NULL,NULL,NULL,NULL,'USR-56431050:1497de4bc1b:-7fec-REPORT'),('USRROL733085c2:17b62206af7:-7fff','SHARED','USR-56431050:1497de4bc1b:-7fec','ADMIN',NULL,NULL,NULL,NULL,'USR-56431050:1497de4bc1b:-7fec-SHARED'),('USRROL733085c2:17b62206af7:-8000','MASTER','USR-56431050:1497de4bc1b:-7fec','ADMIN',NULL,NULL,NULL,NULL,'USR-56431050:1497de4bc1b:-7fec-MASTER');
+INSERT INTO `sys_user_role` VALUES ('USRROL-44614eed:17ba4606b00:-7ff3','WF_EDITOR','USR24c72011:17b9f749b0e:-7e78','JDC','CAT','CATICLAN JETTY PORT TERMINAL',NULL,NULL,'USR24c72011:17b9f749b0e:-7e78-WF_EDITOR-CAT'),('USRROL-44614eed:17ba4606b00:-7ff4','SHARED','USR24c72011:17b9f749b0e:-7e78','JDC','CAT','CATICLAN JETTY PORT TERMINAL',NULL,NULL,'USR24c72011:17b9f749b0e:-7e78-SHARED-CAT'),('USRROL-44614eed:17ba4606b00:-7ff5','RULE_AUTHOR','USR24c72011:17b9f749b0e:-7e78','JDC','CAT','CATICLAN JETTY PORT TERMINAL',NULL,NULL,'USR24c72011:17b9f749b0e:-7e78-RULE_AUTHOR-CAT'),('USRROL-44614eed:17ba4606b00:-7ff6','REPORT','USR24c72011:17b9f749b0e:-7e78','JDC','CAT','CATICLAN JETTY PORT TERMINAL',NULL,NULL,'USR24c72011:17b9f749b0e:-7e78-REPORT-CAT'),('USRROL-44614eed:17ba4606b00:-7ff7','MASTER','USR24c72011:17b9f749b0e:-7e78','JDC','CAT','CATICLAN JETTY PORT TERMINAL',NULL,NULL,'USR24c72011:17b9f749b0e:-7e78-MASTER-CAT'),('USRROL-44614eed:17ba4606b00:-7ff8','COLLECTOR','USR24c72011:17b9f749b0e:-7e78','JDC','CAT','CATICLAN JETTY PORT TERMINAL',NULL,NULL,'USR24c72011:17b9f749b0e:-7e78-COLLECTOR-CAT'),('USRROL-44614eed:17ba4606b00:-7ff9','ADMIN','USR24c72011:17b9f749b0e:-7e78','JDC','CAT','CATICLAN JETTY PORT TERMINAL',NULL,NULL,'USR24c72011:17b9f749b0e:-7e78-ADMIN-CAT'),('USRROL-dbce2cf:17b9f8f6448:-7ffa','COLLECTOR','USR-48c6872f:17b9f7070a0:-7e77','ADMIN',NULL,NULL,NULL,NULL,'USR-48c6872f:17b9f7070a0:-7e77-COLLECTOR'),('USRROL-dbce2cf:17b9f8f6448:-7ffb','WF_EDITOR','USR-48c6872f:17b9f7070a0:-7e77','ADMIN',NULL,NULL,NULL,NULL,'USR-48c6872f:17b9f7070a0:-7e77-WF_EDITOR'),('USRROL-dbce2cf:17b9f8f6448:-7ffc','SHARED','USR-48c6872f:17b9f7070a0:-7e77','ADMIN',NULL,NULL,NULL,NULL,'USR-48c6872f:17b9f7070a0:-7e77-SHARED'),('USRROL-dbce2cf:17b9f8f6448:-7ffd','RULE_AUTHOR','USR-48c6872f:17b9f7070a0:-7e77','ADMIN',NULL,NULL,NULL,NULL,'USR-48c6872f:17b9f7070a0:-7e77-RULE_AUTHOR'),('USRROL-dbce2cf:17b9f8f6448:-7ffe','REPORT','USR-48c6872f:17b9f7070a0:-7e77','ADMIN',NULL,NULL,NULL,NULL,'USR-48c6872f:17b9f7070a0:-7e77-REPORT'),('USRROL-dbce2cf:17b9f8f6448:-7fff','MASTER','USR-48c6872f:17b9f7070a0:-7e77','ADMIN',NULL,NULL,NULL,NULL,'USR-48c6872f:17b9f7070a0:-7e77-MASTER'),('USRROL-dbce2cf:17b9f8f6448:-8000','ADMIN','USR-48c6872f:17b9f7070a0:-7e77','ADMIN',NULL,NULL,NULL,NULL,'USR-48c6872f:17b9f7070a0:-7e77-ADMIN');
 /*!40000 ALTER TABLE `sys_user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1177,7 +1210,7 @@ CREATE TABLE `terminal` (
 
 LOCK TABLES `terminal` WRITE;
 /*!40000 ALTER TABLE `terminal` DISABLE KEYS */;
-INSERT INTO `terminal` VALUES ('1','ACTIVE','CATICLAN JETTY PORT TERMINAL','Caticlan Jetty Port Terminal, Aklan');
+INSERT INTO `terminal` VALUES ('1','ACTIVE','CATICLAN JETTY PORT TERMINAL','Caticlan Jetty Port Terminal, Aklan'),('CAG','ACTIVE','CAGBAN JETTY PORT TERMINAL','CAGBAN JETTY PORT TERMINAL, AKLAN'),('CAT','ACTIVE','CATICLAN JETTY PORT TERMINAL','CATICLAN JETTY PORT TERMINAL, AKLAN');
 /*!40000 ALTER TABLE `terminal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1238,6 +1271,8 @@ CREATE TABLE `ticket` (
   `tag` varchar(50) DEFAULT NULL,
   `tokenid` varchar(15) DEFAULT NULL,
   `refno` varchar(25) DEFAULT NULL,
+  `routeid` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `traveldate` date DEFAULT NULL,
   PRIMARY KEY (`objid`),
   UNIQUE KEY `uix_barcode` (`barcode`),
   UNIQUE KEY `uix_seqno` (`seqno`),
@@ -1245,7 +1280,10 @@ CREATE TABLE `ticket` (
   KEY `ix_tag` (`tag`),
   KEY `ix_dtfiled` (`dtfiled`),
   KEY `ix_refno` (`refno`),
-  KEY `ix_dtused` (`dtused`)
+  KEY `ix_dtused` (`dtused`),
+  KEY `ix_routeid` (`routeid`),
+  KEY `ix_traveldate` (`traveldate`),
+  CONSTRAINT `fk_ticket_routeid` FOREIGN KEY (`routeid`) REFERENCES `route` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1255,6 +1293,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
+INSERT INTO `ticket` VALUES ('TKT-bff63a1:17ba4ba0cf7:-7fe1','CAT211000006','9J5YL5N1X','2021-09-02 16:36:22',NULL,'A','RCT27175720:17ba505f089:-7e70','cashreceipt','TOURIST',NULL,'T5100002','ROUTE5e26f8cc:17ba02c32c0:-7f77',NULL),('TKT-bff63a1:17ba4ba0cf7:-7fe2','CAT211000005','J6MUQ0EF8','2021-09-02 16:36:22',NULL,'A','RCT27175720:17ba505f089:-7e70','cashreceipt','TOURIST',NULL,'T5100002','ROUTE5e26f8cc:17ba02c32c0:-7f77',NULL),('TKT-bff63a1:17ba4ba0cf7:-7fe3','CAT211000004','TUDLLMV5N','2021-09-02 16:36:22',NULL,'A','RCT27175720:17ba505f089:-7e70','cashreceipt','TOURIST',NULL,'T5100002','ROUTE290d16d3:17ba01919c0:-7ef0',NULL),('TKT-bff63a1:17ba4ba0cf7:-7fe4','CAT211000003','07MPYRWXL','2021-09-02 16:36:22',NULL,'A','RCT27175720:17ba505f089:-7e70','cashreceipt','TOURIST',NULL,'T5100002','ROUTE290d16d3:17ba01919c0:-7ef0',NULL),('TKT-bff63a1:17ba4ba0cf7:-7fe7','CAT211000002','0510763NA','2021-09-02 16:18:49',NULL,'A','RCT27175720:17ba505f089:-7eaa','cashreceipt','TOURIST',NULL,'T5100001','ROUTE5e26f8cc:17ba02c32c0:-7f77',NULL),('TKT-bff63a1:17ba4ba0cf7:-7fe8','CAT211000001','EE4EE5NJ4','2021-09-02 16:18:49',NULL,'A','RCT27175720:17ba505f089:-7eaa','cashreceipt','TOURIST',NULL,'T5100001','ROUTE290d16d3:17ba01919c0:-7ef0',NULL);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1288,6 +1327,7 @@ CREATE TABLE `ticket_void` (
 
 LOCK TABLES `ticket_void` WRITE;
 /*!40000 ALTER TABLE `ticket_void` DISABLE KEYS */;
+INSERT INTO `ticket_void` VALUES ('TKTV-bff63a1:17ba4ba0cf7:-7fe5','TKT-bff63a1:17ba4ba0cf7:-7fe8','2021-09-02 16:25:42','test','USR-48c6872f:17b9f7070a0:-7e77','ADMIN ADMIN'),('TKTV-bff63a1:17ba4ba0cf7:-7fe6','TKT-bff63a1:17ba4ba0cf7:-7fe7','2021-09-02 16:25:42','test','USR-48c6872f:17b9f7070a0:-7e77','ADMIN ADMIN');
 /*!40000 ALTER TABLE `ticket_void` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1324,7 +1364,7 @@ CREATE TABLE `ticketing_itemaccount` (
 
 LOCK TABLES `ticketing_itemaccount` WRITE;
 /*!40000 ALTER TABLE `ticketing_itemaccount` DISABLE KEYS */;
-INSERT INTO `ticketing_itemaccount` VALUES ('TERMINAL_FEE_-_RORO_TOURIST','TERMINAL FEE - RORO TOURIST','ITMACCT-79100522:160c3ce5dfc:-7e71','623_CJPPT','AKLAN TERMINAL (RORO)','FUND-3afca170:1511de24dba:-7f9f','EEDD',0,'FEE',NULL),('TERMINAL_FEE_-_TOURIST','TERMINAL FEE - TOURIST','REVITEM-5e5a6bef:1493191e5fd:-7e10','623_CJPPT','AKLAN TERMINAL (TOURIST)','FUND-3afca170:1511de24dba:-7f9f','EEDD',0,'FEE',NULL);
+INSERT INTO `ticketing_itemaccount` VALUES ('TERMINAL_FEE_-_RORO_TOURIST','TERMINAL FEE - RORO TOURIST','ITMACCT-544a14e9:17ba4667ca5:-7d7e','-','TERMINAL TICKET (RORO)','GENERAL','GENERAL FUND',0,'FEE',NULL),('TERMINAL_FEE_-_TOURIST','TERMINAL FEE - TOURIST','ITMACCT-544a14e9:17ba4667ca5:-7dd7','-','TERMINAL TICKET (TOURIST)','GENERAL','GENERAL FUND',0,'FEE',NULL),('TOURIST_FEE_CAGBAN','TOURIST FEE CAGBAN','ITMACCT-544a14e9:17ba4667ca5:-7dd7:CAG','--CAG','TERMINAL TICKET (TOURIST) CAGBAN JETTY PORT TERMINAL','GENERAL','GENERAL FUND',0,'FEE',NULL),('TOURIST_FEE_CATICLAN','TOURIST FEE CATICLAN','ITMACCT-544a14e9:17ba4667ca5:-7dd7:CAT','--CAT','TERMINAL TICKET (TOURIST) CATICLAN JETTY PORT TERMINAL','GENERAL','GENERAL FUND',0,'FEE',NULL);
 /*!40000 ALTER TABLE `ticketing_itemaccount` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1551,4 +1591,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-26 20:44:26
+-- Dump completed on 2021-09-02 16:48:18

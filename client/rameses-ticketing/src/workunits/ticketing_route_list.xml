@@ -1,0 +1,23 @@
+<workunit extends="com/rameses/seti2/templates/CrudNodeList.xml" 
+          schemaName="ticketing_route" 
+          allowCreate="false" allowDelete="false" allowOpen="false" >
+
+    <invokers>
+        <invoker folderid="explorer/master/ticketing" 
+                 caption="Routes" action="init"
+                 role="MASTER" index="-90" 
+                 cols="name,sortorder,origin.name,destination.name" 
+                 hiddenCols="objid,state" 
+                 orderBy="sortorder,name" 
+                 allowCreate="true" allowOpen="true" allowDelete="true" />
+
+        <invoker folderid="menucategory/ticketing/mgmt" 
+                 caption="View Routes" action="init" 
+                 role="SHARED" index="-90" 
+                 cols="name,sortorder,origin.name,destination.name" 
+                 hiddenCols="objid,state" 
+                 orderBy="sortorder,name" />
+    </invokers>
+    
+    <code class="com.rameses.etracs.ticketing.models.RouteListModel" />     
+</workunit>

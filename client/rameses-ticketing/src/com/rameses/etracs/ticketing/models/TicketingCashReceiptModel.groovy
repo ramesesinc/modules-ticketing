@@ -34,7 +34,7 @@ public class TicketingCashReceiptModel extends CommonCashReceiptModel {
         v.numfil = numfil;
         v.numnonfil = numnonfil;
         v.tag = entity.tag; 
-        v.route = entity.route;
+        v.routes = [ entity.route ];
         query.info = v;
         
         super.findTxn();
