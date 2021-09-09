@@ -9,8 +9,11 @@ import {
   Spacer,
   Card,
   Title,
-  Subtitle
+  Subtitle,
 } from "rsi-react-web-components";
+
+import PrivacyStatement from "./PrivacyStatement";
+import TermsAndConditions from "./TermsAndConditions";
 
 const Disclaimer = ({
   history,
@@ -19,6 +22,8 @@ const Disclaimer = ({
 }) => {
   const [agree, setAgree] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+  const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showTermsAndConditions, setShowTermsAndConditions] = useState(false);
 
   const onSubmit = () => {
     if (!agree) {
@@ -30,6 +35,8 @@ const Disclaimer = ({
 
   return (
     <React.Fragment>
+      <TermsAndConditions open={showTermsAndConditions} onAccept={() => setShowTermsAndConditions(false)} />
+      <PrivacyStatement open={showPrivacy} onAccept={() => setShowPrivacy(false)} />
       <MsgBox
         open={showMessage}
         msg="Kindly click on the check box to agree on the terms and conditions"
@@ -37,22 +44,19 @@ const Disclaimer = ({
       />
       <Card>
         <Title>{title}</Title>
-        <Subtitle>Initial Information</Subtitle>
+        <Subtitle>Caticlan and Cagban Passenger Terminals</Subtitle>
         <Spacer />
         <Panel style={styles.container}>
           <p style={styles.text}>
-            Please read before proceeding. The following
-            section will require you to provide names of
-            guests and other information that will require consent.
+            Thank you for your interest in availing this service application.
           </p>
           <p style={styles.text}>
-            This information will be used for this transaction and
-            for tourism purposes. In compliance with RA 10173 or Data
-            Privacy Act of the Philippines, your data will not be
-            used for other purposes except for the above mentioned.
+            By using this service, you agree to these 
+            <span onClick={() => setShowTermsAndConditions(true)} style={styles.link}>terms and conditions</span>.
           </p>
           <p style={styles.text}>
-            By using, you agree to our terms and conditions.
+            We value your privacy. Please read our privacy statement 
+            <span onClick={() => setShowPrivacy(true)} style={styles.link}>here</span>.
           </p>
           <Spacer height={30} />
           <Panel style={{padding: "0px 30px"}}>
@@ -86,9 +90,16 @@ const styles = {
     borderShadow: "5px 0px 7px -7px rgba(0,0,0,0.8)"
   },
   text: {
-    textAlign: "center",
+    // fontSize: 14,
+    textAlign: "left",
     opacity: 0.75,
     marginTop: 0,
+  },
+  link: {
+    color: "blue",
+    cursor: "pointer",
+    textDecoration: "underline",
+    marginLeft: 5,
   }
 };
 

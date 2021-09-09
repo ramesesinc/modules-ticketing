@@ -1,37 +1,52 @@
 import React, { useState } from 'react'
-import { Page, StateProvider, Content } from "rsi-react-web-components";
+import { Page, StateProvider, Content, Spacer } from "rsi-react-web-components";
 import "rsi-react-web-components/dist/index.css";
+
+export const ACTIONS = {
+  SET_ENTITY: "SET_ENTITY",
+  SET_GUESTINFO: "SET_GUESTINFO",
+  SET_ROUTES: "SET_ROUTES",
+  SET_PO: "SET_PO",
+  SET_BILL: "SET_BILL",
+  SET_CONTACT: "SET_CONTACT",
+}
 
 const initialState = {
   txntype: "ticketing",
   txntypename: "ticketing",
   origin: 'filipizen',
   bill: {},
-  contact: {},
+  po: {},
   entity: {
-    guestInfo: {total: 0, numadult: null, numsenior: null, numchildren: null, numfil: null, numnonfil: null},
-    routes: [
-      {objid: "1", origin: "Caticlan", destination: "Cagban", title: "Caticlan - Cagban", selected: false},
-      {objid: "2", origin: "Cagban", destination: "Caticlan", title: "Cagban - Caticlan", selected: false },
-    ],
-  }
+    guestInfo: {total: 0, numadult: null, numchildren: null, numnonfil: null},
+    routes: [],
+  },
+  contact: {},
 }
 
 const reducer = (draft, action) => {
   switch(action.type) {
-    case "SET_ENTITY":
+    case ACTIONS.SET_ENTITY:
       draft.entity = action.entity;
       return;
     
-    case "SET_GUESTINFO":
+    case ACTIONS.SET_GUESTINFO:
       draft.entity.guestInfo = action.guestInfo;
       return;
     
-    case "SET_BILL":
-      draft.bill = action.bill;
+    case ACTIONS.SET_ROUTES:
+      draft.entity.routes = action.routes;
+      return;
+
+    case ACTIONS.SET_PO:
+      draft.po = action.po;
       return;
     
-    case "SET_CONTACT":
+    case ACTIONS.SET_BILL:
+      draft.bill = action.bill;
+      return;
+
+    case ACTIONS.SET_CONTACT:
       draft.contact = action.contact;
       return;
   }
@@ -93,7 +108,7 @@ const TerminalTicketWebController = ({
     moveNextStep,
     movePrevStep,
     cancelPayment,
-    title: "Terminal Fee Ticket Order",
+    title: "Online Terminal Pass Issuance",
   };
 
   return (
@@ -102,6 +117,7 @@ const TerminalTicketWebController = ({
         <Content center>
           <PageComponent page={page} {...compProps} />
         </Content>
+        <Spacer height={40} />
       </Page>
     </StateProvider>
   )

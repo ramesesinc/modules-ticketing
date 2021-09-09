@@ -5,7 +5,7 @@ import { EPayment } from 'rsi-react-filipizen-components'
 import OnlineBilling from './OnlineBilling';
 
 const Payment = (props) => {
-  const [ctx, dispatch] = useData()
+  const [ctx] = useData()
   const module = {
     title: 'Realty Tax Online Billing',
     component: OnlineBilling

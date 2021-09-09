@@ -1,21 +1,24 @@
 import React from "react";
 import { useData } from "rsi-react-web-components";
 import { EPayment } from "rsi-react-filipizen-components";
-import OrderFee from "./OrderFee";
 
 const OrderFeePayment = (props) => {
-  const [ctx, dispatch] = useData();
+  const [ctx ] = useData();
   const module = {
-    title: "Boracay Terminal Fee Ticket Order",
-    component: OrderFee
+    title: "Online Terminal Pass Issuance",
   };
+
   return (
     <EPayment
       module={module}
       {...props}
       contact={ctx.contact}
-      initialStep={1}
+      bill={ctx.bill}
+      po={ctx.po}
+      initialStep={3}
       cancelPayment={props.cancelPayment}
+      payee={{paidby: ctx.contact.name, paidbyaddress: ctx.contact.address}}
+      showExpiry={false}
     />
   );
 };

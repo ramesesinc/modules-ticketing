@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   FormPanel,
   Panel,
   Title,
   Subtitle,
+  Subtitle3,
   Checkbox,
-  Integer,
   Date,
-  Label,
   Spacer,
   ActionBar,
   Button,
@@ -17,22 +16,37 @@ import {
   useData,
   isDateBefore,
   isDateAfter,
-  dateAdd
+  dateAdd,
+  Service,
 } from "rsi-react-web-components";
+
+import { ACTIONS } from "./TerminalTicketWebController";
 
 const TravelItinerary = ({
   title,
   partner,
-  service,
-  location,
-  history,
   moveNextStep,
   movePrevStep,
 }) => {
   const [ctx, dispatch] = useData();
   const [entity, setEntity] = useState({...ctx.entity});
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
   const [routeErrors, setRouteErrors] = useState([{},{}]);
+
+  useEffect(() => {
+    setLoading(true);
+    const svc = Service.lookup(`${partner.id}:OnlineTicketingService`, "ticketing");
+    svc.invoke("getRoutes", {}, (err, routes) => {
+      if (err) {
+        setError(err.toString());
+      } else {
+        dispatch({type: ACTIONS.SET_ROUTES, routes});
+        setEntity({...entity, routes});
+      }
+      setLoading(false);
+    })
+  }, []);
 
   const validateTravel = () => {
     setError(null);
@@ -84,17 +98,22 @@ const TravelItinerary = ({
     }
   }
 
+  if (loading) {
+    return null;
+  }
+
   return (
     <Card>
       <Title>{title}</Title>
       <Subtitle>Travel Itinerary</Subtitle>
       <Spacer />
       <FormPanel context={entity} handler={setEntity}>
-        <h4>Specify Dates of Travel</h4>
+        <Subtitle3>Issue QR Code for use in:</Subtitle3>
         <Error msg={error} />
+        <Spacer height={10} />
         {entity.routes.map((route, idx) =>
           <Panel style={styles.itineraryContainer} key={route.objid}>
-            <Checkbox caption={`${route.origin} - ${route.destination}`} name={`routes[${idx}].selected`} />
+            <Checkbox caption={`${route.name}`} name={`routes[${idx}].selected`} />
             <Date
               name={`routes[${idx}].traveldate`}
               fullWidth={false}
