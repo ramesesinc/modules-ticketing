@@ -10415,15 +10415,15 @@ rollup@^1.32.1:
     "@types/node" "*"
     acorn "^7.1.0"
 
-rsi-react-filipizen-components@^0.2.33:
-  version "0.2.34"
-  resolved "https://registry.yarnpkg.com/rsi-react-filipizen-components/-/rsi-react-filipizen-components-0.2.34.tgz#0bb3c39f2549f6f609e5df7f1163ce6460b52548"
-  integrity sha512-UNsktu0rc5YbT13a5vwk146MAGIURgkSuMuPrJXNwNIgenZE485hDns8/LJ8JWW/lRAM5AMcWjsuFL6u9Aub5w==
+rsi-react-filipizen-components@^0.2.37:
+  version "0.2.37"
+  resolved "https://registry.yarnpkg.com/rsi-react-filipizen-components/-/rsi-react-filipizen-components-0.2.37.tgz#af95fdf2cc4ce3baf00d6643abe707bbee2f837b"
+  integrity sha512-Ufz75EnETaEGdj4ccKCRVPrF7pfil36OGpU3bJeJms7cc53V0DEHQ7kmRUrZZAzfZ6qlXOHqVo2LPhd/mNFkkA==
 
-rsi-react-web-components@^0.2.32:
-  version "0.2.33"
-  resolved "https://registry.yarnpkg.com/rsi-react-web-components/-/rsi-react-web-components-0.2.33.tgz#30195fada0078bfc184a5903110249484a14c7bf"
-  integrity sha512-5v96rsPju+j65UFDzW2shBUCUzSkWaFQJmBMqyhlRCOnvplalRPsOuI/s9D/4YFwdP/1BaVDZTVg1RD4GuGCdw==
+rsi-react-web-components@^0.2.37:
+  version "0.2.37"
+  resolved "https://registry.yarnpkg.com/rsi-react-web-components/-/rsi-react-web-components-0.2.37.tgz#5c7c189e033e0d9565ed63e9248f06456906562d"
+  integrity sha512-FTzrwRqpH8G6H+fAAi73Uuu8yMRkfIUGe+kzYvfAgD31nHzjhaUwLu2WpiZFxGuhkF49IoQjtcaW1dDaRfOsQw==
   dependencies:
     "@date-io/date-fns" "^1.3.13"
     "@material-ui/core" "^4.11.0"
