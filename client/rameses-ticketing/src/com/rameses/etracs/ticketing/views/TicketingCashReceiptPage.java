@@ -31,104 +31,293 @@ public class TicketingCashReceiptPage extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlInitial = new com.rameses.rcp.control.XPanel();
-        xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
         xLabel5 = new com.rameses.rcp.control.XLabel();
         xLabel6 = new com.rameses.rcp.control.XLabel();
-        xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
-        xIntegerField2 = new com.rameses.rcp.control.XIntegerField();
-        xIntegerField3 = new com.rameses.rcp.control.XIntegerField();
-        xIntegerField4 = new com.rameses.rcp.control.XIntegerField();
-        xIntegerField5 = new com.rameses.rcp.control.XIntegerField();
+        xFormPanel3 = new com.rameses.rcp.control.XFormPanel();
+        xFormPanel4 = new com.rameses.rcp.control.XFormPanel();
+        xLabel4 = new com.rameses.rcp.control.XLabel();
+        xLabel8 = new com.rameses.rcp.control.XLabel();
+        xTextField3 = new com.rameses.rcp.control.XTextField();
+        xTextField4 = new com.rameses.rcp.control.XTextField();
+        xLabel7 = new com.rameses.rcp.control.XLabel();
+        xPanel1 = new com.rameses.rcp.control.XPanel();
+        xFormPanel5 = new com.rameses.rcp.control.XFormPanel();
+        xIntegerField6 = new com.rameses.rcp.control.XIntegerField();
+        xIntegerField13 = new com.rameses.rcp.control.XIntegerField();
+        xIntegerField8 = new com.rameses.rcp.control.XIntegerField();
+        xIntegerField14 = new com.rameses.rcp.control.XIntegerField();
+        xIntegerField15 = new com.rameses.rcp.control.XIntegerField();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(20, 32767));
+        xFormPanel6 = new com.rameses.rcp.control.XFormPanel();
+        xButton1 = new com.rameses.rcp.control.XButton();
+        xLabel10 = new com.rameses.rcp.control.XLabel();
+        xDecimalField2 = new com.rameses.rcp.control.XDecimalField();
+        xLabel11 = new com.rameses.rcp.control.XLabel();
+        xPanel2 = new com.rameses.rcp.control.XPanel();
+        xLabel9 = new com.rameses.rcp.control.XLabel();
+        xFormPanel7 = new com.rameses.rcp.control.XFormPanel();
+        xTextField5 = new com.rameses.rcp.control.XTextField();
 
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(25, 30, 0, 0));
         setMinimumSize(new java.awt.Dimension(586, 313));
         setPreferredSize(new java.awt.Dimension(586, 313));
-        setLayout(new java.awt.BorderLayout());
-
-        pnlInitial.setLayout(new java.awt.BorderLayout());
-
-        xFormPanel2.setCaptionFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        xFormPanel2.setCaptionVAlignment(com.rameses.rcp.constant.UIConstants.CENTER);
-        xFormPanel2.setCaptionWidth(200);
-        xFormPanel2.setCellspacing(4);
+        setLayout(new com.rameses.rcp.control.layout.YLayout());
 
         xLabel5.setCaption("Route");
         xLabel5.setExpression("#{ entity.route.name }");
         xLabel5.setName(""); // NOI18N
         xLabel5.setVisibleWhen("");
-        xLabel5.setCellPadding(new java.awt.Insets(30, 30, 0, 0));
-        xLabel5.setFontStyle("font-size:16; font-weight: bold;");
+        xLabel5.setCellPadding(new java.awt.Insets(25, 30, 0, 0));
+        xLabel5.setFontStyle("font-size:19; font-weight: bold;");
         xLabel5.setForeground(new java.awt.Color(50, 50, 50));
-        xLabel5.setPreferredSize(new java.awt.Dimension(0, 30));
-        xLabel5.setShowCaption(false);
-        xFormPanel2.add(xLabel5);
+        add(xLabel5);
 
         xLabel6.setCaption("Route");
-        xLabel6.setExpression("Guest Information");
         xLabel6.setName(""); // NOI18N
         xLabel6.setVisibleWhen("");
-        xLabel6.setCellPadding(new java.awt.Insets(15, 30, 5, 0));
-        xLabel6.setFontStyle("font-size:14; font-weight: bold;");
+        xLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 0, 10, 0));
+        xLabel6.setFontStyle("font-size:15; font-weight: bold;");
         xLabel6.setForeground(new java.awt.Color(50, 50, 50));
-        xLabel6.setPreferredSize(new java.awt.Dimension(0, 24));
         xLabel6.setShowCaption(false);
-        xFormPanel2.add(xLabel6);
+        xLabel6.setText("General Information");
+        add(xLabel6);
 
-        xIntegerField1.setCaption("No. of Adults");
-        xIntegerField1.setName("numadult"); // NOI18N
-        xIntegerField1.setCellPadding(new java.awt.Insets(0, 45, 0, 0));
-        xIntegerField1.setFontStyle("font-size:14");
-        xIntegerField1.setPreferredSize(new java.awt.Dimension(100, 24));
-        xIntegerField1.setRequired(true);
-        xFormPanel2.add(xIntegerField1);
+        xFormPanel3.setCaptionFontStyle("font-size:14;");
+        xFormPanel3.setCaptionVAlignment(com.rameses.rcp.constant.UIConstants.CENTER);
+        xFormPanel3.setCaptionWidth(150);
+        xFormPanel3.setCellspacing(4);
 
-        xIntegerField2.setCaption("No. of Senior");
-        xIntegerField2.setName("numsenior"); // NOI18N
-        xIntegerField2.setCellPadding(new java.awt.Insets(0, 45, 0, 0));
-        xIntegerField2.setFontStyle("font-size:14");
-        xIntegerField2.setPreferredSize(new java.awt.Dimension(100, 24));
-        xIntegerField2.setRequired(true);
-        xFormPanel2.add(xIntegerField2);
+        xFormPanel4.setCaptionVAlignment(com.rameses.rcp.constant.UIConstants.CENTER);
+        xFormPanel4.setCaptionWidth(150);
+        xFormPanel4.setOrientation(com.rameses.rcp.constant.UIConstants.HORIZONTAL);
+        xFormPanel4.setPadding(new java.awt.Insets(0, 0, 0, 0));
+        xFormPanel4.setShowCaption(false);
+        xFormPanel4.setStretchWidth(100);
 
-        xIntegerField3.setCaption("No. of Children");
-        xIntegerField3.setName("numchildren"); // NOI18N
-        xIntegerField3.setCellPadding(new java.awt.Insets(0, 45, 0, 0));
-        xIntegerField3.setFontStyle("font-size:14");
-        xIntegerField3.setPreferredSize(new java.awt.Dimension(100, 24));
-        xIntegerField3.setRequired(true);
-        xFormPanel2.add(xIntegerField3);
+        xLabel4.setCaption("Receipt Number");
+        xLabel4.setExpression("#{entity.receiptno}");
+        xLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        xLabel4.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(180, 180, 180)), javax.swing.BorderFactory.createEmptyBorder(1, 3, 1, 2)));
+        xLabel4.setCaptionFontStyle("font-size:16;");
+        xLabel4.setCellPadding(new java.awt.Insets(0, 15, 0, 0));
+        xLabel4.setFontStyle("font-size:16;font-weight: bold;");
+        xLabel4.setForeground(new java.awt.Color(50, 50, 50));
+        xLabel4.setPreferredSize(new java.awt.Dimension(200, 30));
+        xFormPanel4.add(xLabel4);
 
-        xIntegerField4.setCaption("No. of Filipinos");
-        xIntegerField4.setName("numfil"); // NOI18N
-        xIntegerField4.setCellPadding(new java.awt.Insets(25, 45, 0, 0));
-        xIntegerField4.setFontStyle("font-size:14");
-        xIntegerField4.setPreferredSize(new java.awt.Dimension(100, 24));
-        xIntegerField4.setRequired(true);
-        xFormPanel2.add(xIntegerField4);
+        xLabel8.setCaption("Receipt Date");
+        xLabel8.setExpression("#{entity.receiptdate}");
+        xLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        xLabel8.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(180, 180, 180)), javax.swing.BorderFactory.createEmptyBorder(1, 3, 1, 2)));
+        xLabel8.setCaptionFontStyle("font-size:16;");
+        xLabel8.setCaptionWidth(110);
+        xLabel8.setCellPadding(new java.awt.Insets(0, 28, 0, 0));
+        xLabel8.setFontStyle("font-size:16;");
+        xLabel8.setForeground(new java.awt.Color(30, 30, 30));
+        xLabel8.setPreferredSize(new java.awt.Dimension(200, 30));
+        xFormPanel4.add(xLabel8);
 
-        xIntegerField5.setCaption("No. of Non-Filipinos");
-        xIntegerField5.setName("numnonfil"); // NOI18N
-        xIntegerField5.setCellPadding(new java.awt.Insets(0, 45, 0, 0));
-        xIntegerField5.setFontStyle("font-size:14");
-        xIntegerField5.setPreferredSize(new java.awt.Dimension(100, 24));
-        xIntegerField5.setRequired(true);
-        xFormPanel2.add(xIntegerField5);
+        xFormPanel3.add(xFormPanel4);
 
-        pnlInitial.add(xFormPanel2, java.awt.BorderLayout.CENTER);
+        xTextField3.setCaption("Paid By");
+        xTextField3.setName("entity.paidby"); // NOI18N
+        xTextField3.setCaptionFontStyle("font-size:16;");
+        xTextField3.setCellPadding(new java.awt.Insets(0, 15, 0, 0));
+        xTextField3.setFontStyle("font-size:16;");
+        xTextField3.setPreferredSize(new java.awt.Dimension(540, 30));
+        xTextField3.setRequired(true);
+        xFormPanel3.add(xTextField3);
 
-        add(pnlInitial, java.awt.BorderLayout.CENTER);
+        xTextField4.setCaption("Address");
+        xTextField4.setName("entity.paidbyaddress"); // NOI18N
+        xTextField4.setCaptionFontStyle("font-size:16;");
+        xTextField4.setCellPadding(new java.awt.Insets(0, 15, 0, 0));
+        xTextField4.setFontStyle("font-size:16;");
+        xTextField4.setPreferredSize(new java.awt.Dimension(540, 30));
+        xTextField4.setRequired(true);
+        xFormPanel3.add(xTextField4);
+
+        add(xFormPanel3);
+
+        xLabel7.setCaption("Route");
+        xLabel7.setExpression("Guest Information");
+        xLabel7.setName(""); // NOI18N
+        xLabel7.setVisibleWhen("");
+        xLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 0, 10, 0));
+        xLabel7.setCellPadding(new java.awt.Insets(15, 30, 5, 0));
+        xLabel7.setFontStyle("font-size:15; font-weight: bold;");
+        xLabel7.setForeground(new java.awt.Color(50, 50, 50));
+        xLabel7.setShowCaption(false);
+        add(xLabel7);
+
+        xPanel1.setLayout(new com.rameses.rcp.control.layout.XLayout());
+
+        xFormPanel5.setCaptionFontStyle("font-size:14;");
+        xFormPanel5.setCaptionVAlignment(com.rameses.rcp.constant.UIConstants.CENTER);
+        xFormPanel5.setCaptionWidth(200);
+        xFormPanel5.setCellspacing(4);
+
+        xIntegerField6.setCaption("No. of Adults");
+        xIntegerField6.setName("numadult"); // NOI18N
+        xIntegerField6.setCaptionFontStyle("font-size:16;");
+        xIntegerField6.setCellPadding(new java.awt.Insets(0, 15, 0, 0));
+        xIntegerField6.setFontStyle("font-size:16;");
+        xIntegerField6.setPreferredSize(new java.awt.Dimension(100, 30));
+        xIntegerField6.setRequired(true);
+        xFormPanel5.add(xIntegerField6);
+
+        xIntegerField13.setCaption("No. of Discounted");
+        xIntegerField13.setName("numsenior"); // NOI18N
+        xIntegerField13.setCaptionFontStyle("font-size:16;");
+        xIntegerField13.setCellPadding(new java.awt.Insets(0, 15, 0, 0));
+        xIntegerField13.setFontStyle("font-size:16;");
+        xIntegerField13.setPreferredSize(new java.awt.Dimension(100, 30));
+        xIntegerField13.setRequired(true);
+        xFormPanel5.add(xIntegerField13);
+
+        xIntegerField8.setCaption("No. of Children");
+        xIntegerField8.setName("numchildren"); // NOI18N
+        xIntegerField8.setCaptionFontStyle("font-size:16;");
+        xIntegerField8.setCellPadding(new java.awt.Insets(0, 15, 0, 0));
+        xIntegerField8.setFontStyle("font-size:16;");
+        xIntegerField8.setPreferredSize(new java.awt.Dimension(100, 30));
+        xIntegerField8.setRequired(true);
+        xFormPanel5.add(xIntegerField8);
+
+        xIntegerField14.setCaption("No. of Filipinos");
+        xIntegerField14.setName("numfil"); // NOI18N
+        xIntegerField14.setCaptionFontStyle("font-size:16;");
+        xIntegerField14.setCellPadding(new java.awt.Insets(0, 15, 0, 0));
+        xIntegerField14.setFontStyle("font-size:16;");
+        xIntegerField14.setPreferredSize(new java.awt.Dimension(100, 30));
+        xIntegerField14.setRequired(true);
+        xFormPanel5.add(xIntegerField14);
+
+        xIntegerField15.setCaption("No. of Non-Filipinos");
+        xIntegerField15.setName("numnonfil"); // NOI18N
+        xIntegerField15.setCaptionFontStyle("font-size:16;");
+        xIntegerField15.setCellPadding(new java.awt.Insets(0, 15, 0, 0));
+        xIntegerField15.setFontStyle("font-size:16;");
+        xIntegerField15.setPreferredSize(new java.awt.Dimension(100, 30));
+        xIntegerField15.setRequired(true);
+        xFormPanel5.add(xIntegerField15);
+
+        xPanel1.add(xFormPanel5);
+        xPanel1.add(filler1);
+
+        xFormPanel6.setCaptionFontStyle("font-size:14;");
+        xFormPanel6.setCaptionVAlignment(com.rameses.rcp.constant.UIConstants.CENTER);
+        xFormPanel6.setCaptionWidth(150);
+        xFormPanel6.setCellspacing(4);
+
+        xButton1.setCaption(" ");
+        xButton1.setMnemonic('u');
+        xButton1.setName("calculateCharge"); // NOI18N
+        xButton1.setCellPadding(new java.awt.Insets(0, 15, 25, 0));
+        xButton1.setFontStyle("font-size: 16;");
+        xButton1.setPreferredSize(new java.awt.Dimension(180, 34));
+        xButton1.setText("Calculate Charge");
+        xFormPanel6.add(xButton1);
+
+        xLabel10.setCaption("Amount Due");
+        xLabel10.setDepends(new String[] {"totals"});
+        xLabel10.setExpression("#{entity.amount}");
+        xLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        xLabel10.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(180, 180, 180)), javax.swing.BorderFactory.createEmptyBorder(1, 3, 1, 2)));
+        xLabel10.setCaptionFontStyle("font-size:16;");
+        xLabel10.setCellPadding(new java.awt.Insets(0, 15, 0, 0));
+        xLabel10.setNumberFormat("#,##0.00");
+        xLabel10.setPreferredSize(new java.awt.Dimension(180, 30));
+        xFormPanel6.add(xLabel10);
+
+        xDecimalField2.setCaption("Cash Tendered");
+        xDecimalField2.setDepends(new String[] {"totals"});
+        xDecimalField2.setName("cash"); // NOI18N
+        xDecimalField2.setCaptionFontStyle("font-size:16;");
+        xDecimalField2.setCellPadding(new java.awt.Insets(0, 15, 0, 0));
+        xDecimalField2.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        xDecimalField2.setForeground(new java.awt.Color(0, 0, 102));
+        xDecimalField2.setPreferredSize(new java.awt.Dimension(180, 30));
+        xDecimalField2.setRequired(true);
+        xFormPanel6.add(xDecimalField2);
+
+        xLabel11.setCaption("Cash Change");
+        xLabel11.setDepends(new String[] {"totals"});
+        xLabel11.setExpression("#{entity.cashchange}");
+        xLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        xLabel11.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(180, 180, 180)), javax.swing.BorderFactory.createEmptyBorder(1, 3, 1, 2)));
+        xLabel11.setCaptionFontStyle("font-size:16;");
+        xLabel11.setCellPadding(new java.awt.Insets(0, 15, 0, 0));
+        xLabel11.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        xLabel11.setForeground(new java.awt.Color(153, 0, 0));
+        xLabel11.setNumberFormat("#,##0.00");
+        xLabel11.setPreferredSize(new java.awt.Dimension(180, 30));
+        xFormPanel6.add(xLabel11);
+
+        xPanel1.add(xFormPanel6);
+
+        add(xPanel1);
+
+        xPanel2.setLayout(new com.rameses.rcp.control.layout.YLayout());
+
+        xLabel9.setCaption("Route");
+        xLabel9.setName(""); // NOI18N
+        xLabel9.setVisibleWhen("");
+        xLabel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 5, 0));
+        xLabel9.setCellPadding(new java.awt.Insets(15, 30, 5, 0));
+        xLabel9.setFontStyle("font-size:15; font-weight: bold;");
+        xLabel9.setForeground(new java.awt.Color(50, 50, 50));
+        xLabel9.setShowCaption(false);
+        xLabel9.setText("Remarks");
+        xPanel2.add(xLabel9);
+
+        xFormPanel7.setCaptionFontStyle("font-size:14;");
+        xFormPanel7.setCaptionVAlignment(com.rameses.rcp.constant.UIConstants.CENTER);
+        xFormPanel7.setCaptionWidth(150);
+        xFormPanel7.setCellspacing(4);
+        xFormPanel7.setPadding(new java.awt.Insets(0, 0, 0, 0));
+        xFormPanel7.setShowCaption(false);
+
+        xTextField5.setCaption("Remarks");
+        xTextField5.setName("entity.remarks"); // NOI18N
+        xTextField5.setCaptionFontStyle("font-size:15;");
+        xTextField5.setFontStyle("font-size:16;");
+        xTextField5.setPreferredSize(new java.awt.Dimension(710, 30));
+        xTextField5.setShowCaption(false);
+        xFormPanel7.add(xTextField5);
+
+        xPanel2.add(xFormPanel7);
+
+        add(xPanel2);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.rameses.rcp.control.XPanel pnlInitial;
-    private com.rameses.rcp.control.XFormPanel xFormPanel2;
-    private com.rameses.rcp.control.XIntegerField xIntegerField1;
-    private com.rameses.rcp.control.XIntegerField xIntegerField2;
-    private com.rameses.rcp.control.XIntegerField xIntegerField3;
-    private com.rameses.rcp.control.XIntegerField xIntegerField4;
-    private com.rameses.rcp.control.XIntegerField xIntegerField5;
+    private javax.swing.Box.Filler filler1;
+    private com.rameses.rcp.control.XButton xButton1;
+    private com.rameses.rcp.control.XDecimalField xDecimalField2;
+    private com.rameses.rcp.control.XFormPanel xFormPanel3;
+    private com.rameses.rcp.control.XFormPanel xFormPanel4;
+    private com.rameses.rcp.control.XFormPanel xFormPanel5;
+    private com.rameses.rcp.control.XFormPanel xFormPanel6;
+    private com.rameses.rcp.control.XFormPanel xFormPanel7;
+    private com.rameses.rcp.control.XIntegerField xIntegerField13;
+    private com.rameses.rcp.control.XIntegerField xIntegerField14;
+    private com.rameses.rcp.control.XIntegerField xIntegerField15;
+    private com.rameses.rcp.control.XIntegerField xIntegerField6;
+    private com.rameses.rcp.control.XIntegerField xIntegerField8;
+    private com.rameses.rcp.control.XLabel xLabel10;
+    private com.rameses.rcp.control.XLabel xLabel11;
+    private com.rameses.rcp.control.XLabel xLabel4;
     private com.rameses.rcp.control.XLabel xLabel5;
     private com.rameses.rcp.control.XLabel xLabel6;
+    private com.rameses.rcp.control.XLabel xLabel7;
+    private com.rameses.rcp.control.XLabel xLabel8;
+    private com.rameses.rcp.control.XLabel xLabel9;
+    private com.rameses.rcp.control.XPanel xPanel1;
+    private com.rameses.rcp.control.XPanel xPanel2;
+    private com.rameses.rcp.control.XTextField xTextField3;
+    private com.rameses.rcp.control.XTextField xTextField4;
+    private com.rameses.rcp.control.XTextField xTextField5;
     // End of variables declaration//GEN-END:variables
 }
