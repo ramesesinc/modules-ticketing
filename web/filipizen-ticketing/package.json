@@ -1,6 +1,6 @@
 {
   "name": "filipizen-ticketing",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Ticketing Web Module",
   "author": "ramesesinc",
   "license": "MIT",
@@ -50,7 +50,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
-    "rsi-react-filipizen-components": "^0.2.37",
+    "rsi-react-filipizen-components": "^0.2.41",
     "rsi-react-web-components": "^0.2.37"
   },
   "files": [
