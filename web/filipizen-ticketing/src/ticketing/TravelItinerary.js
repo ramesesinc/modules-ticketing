@@ -17,40 +17,38 @@ import {
   isDateBefore,
   isDateAfter,
   dateAdd,
-  Service,
+  Service
 } from "rsi-react-web-components";
 
 import { ACTIONS } from "./TerminalTicketWebController";
 
-const TravelItinerary = ({
-  title,
-  partner,
-  moveNextStep,
-  movePrevStep,
-}) => {
+const TravelItinerary = ({ title, partner, moveNextStep, movePrevStep }) => {
   const [ctx, dispatch] = useData();
-  const [entity, setEntity] = useState({...ctx.entity});
+  const [entity, setEntity] = useState({ ...ctx.entity });
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
-  const [routeErrors, setRouteErrors] = useState([{},{}]);
+  const [routeErrors, setRouteErrors] = useState([{}, {}]);
 
   useEffect(() => {
     setLoading(true);
-    const svc = Service.lookup(`${partner.id}:OnlineTicketingService`, "ticketing");
+    const svc = Service.lookup(
+      `${partner.channelid}:OnlineTicketingService`,
+      "ticketing"
+    );
     svc.invoke("getRoutes", {}, (err, routes) => {
       if (err) {
         setError(err.toString());
       } else {
-        dispatch({type: ACTIONS.SET_ROUTES, routes});
-        setEntity({...entity, routes});
+        dispatch({ type: ACTIONS.SET_ROUTES, routes });
+        setEntity({ ...entity, routes });
       }
       setLoading(false);
-    })
+    });
   }, []);
 
   const validateTravel = () => {
     setError(null);
-    const selectedIdx = entity.routes.findIndex(route => route.selected);
+    const selectedIdx = entity.routes.findIndex((route) => route.selected);
     if (selectedIdx < 0) {
       throw "Kindly select at least one (1) travel destination";
     }
@@ -60,43 +58,47 @@ const TravelItinerary = ({
       if (route.selected) {
         if (!route.traveldate) {
           hasError = true;
-          return {error: "Travel date is required"};
+          return { error: "Travel date is required" };
         }
         if (idx == 0 && !isDateAfter(route.traveldate, dateAdd(-1))) {
           hasError = true;
-          return {error: "Date must be on or after current date"}
+          return { error: "Date must be on or after current date" };
         }
         if (idx == 1 && !isDateAfter(route.traveldate, dateAdd(-1))) {
           hasError = true;
-          return {error: "Date must be on or after departure date"}
+          return { error: "Date must be on or after departure date" };
         }
-        if (idx == 1 && entity.routes[0].selected && entity.routes[0].traveldate) {
+        if (
+          idx == 1 &&
+          entity.routes[0].selected &&
+          entity.routes[0].traveldate
+        ) {
           const entryDate = entity.routes[0].traveldate;
           const returnDate = route.traveldate;
           if (isDateBefore(returnDate, entryDate)) {
             hasError = true;
-            return {error: "Date must be after " + entryDate}
+            return { error: "Date must be after " + entryDate };
           }
         }
       }
-      return {error: null};
-    })
+      return { error: null };
+    });
 
     if (hasError) {
       setRouteErrors(errors);
       throw null;
     }
-  }
+  };
 
   const onSubmit = () => {
     try {
       validateTravel();
-      dispatch({type: "SET_ENTITY", entity});
+      dispatch({ type: "SET_ENTITY", entity });
       moveNextStep();
     } catch (err) {
       setError(err);
     }
-  }
+  };
 
   if (loading) {
     return null;
@@ -111,13 +113,16 @@ const TravelItinerary = ({
         <Subtitle3>Issue QR Code for use in:</Subtitle3>
         <Error msg={error} />
         <Spacer height={10} />
-        {entity.routes.map((route, idx) =>
+        {entity.routes.map((route, idx) => (
           <Panel style={styles.itineraryContainer} key={route.objid}>
-            <Checkbox caption={`${route.name}`} name={`routes[${idx}].selected`} />
+            <Checkbox
+              caption={`${route.name}`}
+              name={`routes[${idx}].selected`}
+            />
             <Date
               name={`routes[${idx}].traveldate`}
               fullWidth={false}
-              style={{width: 200}}
+              style={{ width: 200 }}
               placeholder="mm/dd/yyyy"
               variant="filled"
               error={routeErrors[idx].error}
@@ -125,14 +130,14 @@ const TravelItinerary = ({
               readOnly={!entity.routes[idx].selected}
             />
           </Panel>
-        )}
+        ))}
       </FormPanel>
       <ActionBar>
-        <BackLink action={movePrevStep}/>
+        <BackLink action={movePrevStep} />
         <Button caption="Next" action={onSubmit} />
       </ActionBar>
     </Card>
-  )
+  );
 };
 
 const styles = {
@@ -142,11 +147,11 @@ const styles = {
     border: "1px solid #aaa",
     padding: "0px 15px",
     marginBottom: 5,
-    borderRadius: 5,
+    borderRadius: 5
   },
   text: {
     fontWeight: 800,
-    marginRight: 15,
+    marginRight: 15
   }
 };
 
